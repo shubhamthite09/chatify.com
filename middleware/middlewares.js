@@ -8,9 +8,7 @@ const validator = (req, res, next) => {
   token = req.headers?.authorization ? req.headers?.authorization?.split(" ")[1] : undefined;
   jwt.verify(req.cookies.token, process.env.token_key, (err, decoded) => {
     if (err) {
-      console.log(req.headers.authorization);
       if (err.expiredAt && token) {
-        console.log("yes");
         jwt.verify(token, process.env.refresh_key, async (err, decoded) => {
           if (err) {
             res
@@ -41,7 +39,6 @@ const validator = (req, res, next) => {
           .json({ error: `please login again your token is not valid` });
       }
     } else {
-      console.log("simple token");
       req.body.user = decoded.user;
       req.body.id = decoded.id;
       req.body.role = decoded.role;
