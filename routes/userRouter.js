@@ -113,9 +113,10 @@ userRouer.post("/reg", async (req, res) => {
 });
 userRouer.post("/log", async (req, res) => {
   try {
-    let user = await userModel.findOne({ email: req.body.email });
-    if (user.email) {
-      if (await bcrypt.compare(req.body.password, user.password)) {
+    const {email , password} = req.body
+    let user = await userModel.findOne({ email });
+    if (user) {
+      if (await bcrypt.compare(password, user.password)) {
         token_Genretor(res, user.name, user._id, user.role);
       } else {
         res.status(406).json({ msg: `user password is worng..` });

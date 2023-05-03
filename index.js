@@ -2,7 +2,7 @@ require("dotenv").config();
 const cors = require("cors");
 const { connection } = require("./configration/db");
 const { userRouer } = require("./routes/userRouter");
-const { blogeRouter } = require("./allRouters/blogsRouter");
+// const { blogeRouter } = require("./allRouters/blogsRouter");
 const { twitterRouter } = require("./routes/twitterRouter");
 const { validator } = require("./middleware/middlewares");
 const cookieParser = require("cookie-parser");
@@ -47,7 +47,7 @@ app.use(expressWinston.errorLogger({
 
 app.use("/user", userRouer);
 app.use("/twitter", twitterRouter);
-app.use("/blog", validator, blogeRouter);
+//app.use("/blog", validator, blogeRouter);
 
 app.get("/", (req, res) => {
   try{
