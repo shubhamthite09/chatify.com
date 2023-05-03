@@ -9,7 +9,7 @@ use server.js or start.js file name instaded.
 
 **Step 2** ==>  Then use *git pull origin main* to pull all the code.
 
-**Step 3** ==>  Make your dily contrubution in this *Branch* then commit use *git add .* then *git commit -m"<commit message>"*.
+**Step 3** ==>  Make your daily contrubution in this *Branch* then commit use *git add .* then *git commit -m"<commit message>"*.
 
 **Step 4** ==>  Then push then code using *git push origin <branch name>*.
 
