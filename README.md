@@ -3,6 +3,8 @@
 **please DO NOT USE index.js in YOUR Backend APP**
 use server.js or start.js file name instaded. 
 
+**please Make daily frontend contribution in frontent directory.**
+
 **Step 1** ==>  Please new make new Branch Every day using *git branch <branch name>* then *git checkout <branch name>*.
 
 **Step 2** ==>  Then use *git pull* to pull all the code.
