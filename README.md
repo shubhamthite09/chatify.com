@@ -7,7 +7,7 @@ use server.js or start.js file name instaded.
 
 **Step 1** ==>  Please new make new Branch Every day using *git branch <branch name>* then *git checkout <branch name>*.
 
-**Step 2** ==>  Then use *git pull* to pull all the code.
+**Step 2** ==>  Then use *git pull origin main* to pull all the code.
 
 **Step 3** ==>  Make your dily contrubution in this *Branch* then commit use *git add .* then *git commit -m"<commit message>"*.
 
