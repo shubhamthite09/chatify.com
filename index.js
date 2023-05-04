@@ -1,5 +1,8 @@
 require("dotenv").config();
 const cors = require("cors");
+const {Server} = require('socket.io');
+const http = require('http');
+const { redis } = require("./helpers/redis");
 const { connection } = require("./configration/db");
 const { userRouer } = require("./routes/userRouter");
 // const { blogeRouter } = require("./allRouters/blogsRouter");
@@ -11,7 +14,10 @@ const expressWinston = require("express-winston");
 const express = require("express");
 
 const app = express();
-
+app.use(cors({
+  origin : '*'
+}))
+const httpServer =  http.createServer(app);
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors());
@@ -47,7 +53,40 @@ app.use(expressWinston.errorLogger({
 
 app.use("/user", userRouer);
 app.use("/twitter", twitterRouter);
-//app.use("/blog", validator, blogeRouter);
+
+app.get("/start" , async(req,res) => {
+  // Using setitemout so that the connection should be established
+  try {
+      setTimeout(()=>{
+          res.send({"ok":true,"msg":"Connection Established successfully"});
+      },3000)
+      
+  } catch (error) {
+      res.send({"ok":false,"msg":"Something went wrong"});
+  }
+})
+
+
+const io = new Server(httpServer , {
+  cors : {
+      origin : '*'
+  }
+})
+
+io.on('connection', (socket) => {
+
+  socket.on('join-room' , (RoomID , userID) => {
+
+      console.log(`${userID} joined room ${RoomID}`);
+      socket.join(RoomID);
+      socket.to(RoomID).emit('user-join' , userID);
+
+      socket.on('disconnect' , () => {
+          socket.to(RoomID).emit('user-disconnected', userID);
+      })
+  })
+
+})
 
 app.get("/", (req, res) => {
   try{
@@ -57,12 +96,13 @@ app.get("/", (req, res) => {
   }
 });
 
-app.listen(process.env.PORT, async () => {
+httpServer.listen(process.env.PORT , async() => {
   try {
-    connection;
-    console.log(`connected to mongo db ...`);
-  } catch (err) {
-    console.log({ err: err.message });
+      await connection;
+      console.log(`connected to mongo db ...`);
+      console.log("Redis connected");
+  } catch (error) {
+      console.log("Redis not connected");
   }
-  console.log(`server is runing on ${process.env.PORT}`);
-});
+  console.log(`Server started at ${process.env.PORT}`);
+})
