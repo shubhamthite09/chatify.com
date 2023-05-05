@@ -53,30 +53,64 @@ app.use(expressWinston.errorLogger({
 
 app.use("/user", userRouer);
 app.use("/twitter", twitterRouter);
-
-app.get("/start" , async(req,res) => {
-  // Using setitemout so that the connection should be established
-  try {
-      setTimeout(()=>{
-          res.send({"ok":true,"msg":"Connection Established successfully"});
-      },3000)
-      
-  } catch (error) {
-      res.send({"ok":false,"msg":"Something went wrong"});
-  }
-})
-
-
 const io = new Server(httpServer , {
   cors : {
       origin : '*'
   }
 })
+app.get("/start" , async(req,res) => {
+  // Using setitemout so that the connection should be established
+  try {
+      setTimeout(()=>{
+          res.status(202).send({"ok":true,"msg":"Connection Established successfully"});
+      },500)
+      
+  } catch (error) {
+      res.send({"ok":false,"msg":"Something went wrong"});
+  }
+})
+app.post("/create", async (req, res) => {
+  try {
+      const { roomID, type } = req.body;
+      
+      await redis.set(`${roomID}`, `${type}`);
+      console.log(req.body);
+      res.send({ "ok": true, "msg": "Room created successfully" });
+  } catch (error) {
+      console.log(error);
+      res.send({ "ok": false, "msg": "Something went wrong" });
+  }
+})
+
+app.post('/join', async (req, res) => {
+  try {
+      const { roomID, type } = req.body;
+      let check = await redis.exists(`${roomID}`);
+
+      if(check){
+          const dbType = await redis.get(`${roomID}`);
+          
+          if(dbType == type){
+              res.send({ "ok": true, "msg": "Room joined successfully" });
+          } else {
+              res.send({ "ok": false, "msg": `${type} Room Doesn't Exist`});
+          }
+      } else {
+          res.send({ "ok": false, "msg": "Room Doesn't Exist"});
+      }
+
+  } catch (error) {
+      console.log(error);
+      res.send({ "ok": false, "msg": "Something went wrong" });
+  }
+})
+
+
+
 
 io.on('connection', (socket) => {
-
+  console.log("new user connected",socket.id);
   socket.on('join-room' , (RoomID , userID) => {
-
       console.log(`${userID} joined room ${RoomID}`);
       socket.join(RoomID);
       socket.to(RoomID).emit('user-join' , userID);
