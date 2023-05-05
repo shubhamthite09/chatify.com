@@ -12,6 +12,9 @@ const cookieParser = require("cookie-parser");
 const winston = require("winston");
 const expressWinston = require("express-winston");
 const express = require("express");
+const {chatRouer}= require("./routes/chatRouter")
+const {msgModel} = require("./models/userModle")
+
 
 const app = express();
 app.use(cors({
@@ -53,6 +56,7 @@ app.use(expressWinston.errorLogger({
 
 app.use("/user", userRouer);
 app.use("/twitter", twitterRouter);
+app.use("/chat",validator,chatRouer)
 const io = new Server(httpServer , {
   cors : {
       origin : '*'
@@ -119,6 +123,16 @@ io.on('connection', (socket) => {
           socket.to(RoomID).emit('user-disconnected', userID);
       })
   })
+  socket.on('join-conver',(data)=>{
+    socket.join(data.room)
+  })
+  socket.on("chat",async(data)=>{
+    //sending msg to that room
+    data.time=new Date(data.time)
+    let book = new msgModel({consId:data.room,msg:data.msg,time:data.time})
+    await book.save()
+    io.to(data.room).emit("message",{name:data.username,msg:data.msg})
+})
 
 })
 

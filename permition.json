@@ -16,4 +16,6 @@
       "permitedRoutes": ["/"],
       "permitedMethod":["GET","POST"]
     }
+   
 }
+ //6454db986911a1e167d7ec95

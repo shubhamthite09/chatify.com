@@ -5,11 +5,14 @@ const fs = require("fs");
 const { redis } = require("../helpers/redis");
 
 const validator = (req, res, next) => {
-  token = req.headers?.authorization ? req.headers?.authorization?.split(" ")[1] : undefined;
-  jwt.verify(req.cookies.token, process.env.token_key, (err, decoded) => {
+  ref_token = req.headers?.ref_authorization ? req.headers?.ref_authorization?.split(" ")[1] : undefined;
+  token = req.headers?.authorization ? req.headers?.authorization?.split(" ")[1] : req.cookies.token;
+
+  jwt.verify(token, process.env.token_key, (err, decoded) => {
+
     if (err) {
-      if (err.expiredAt && token) {
-        jwt.verify(token, process.env.refresh_key, async (err, decoded) => {
+      if (err.expiredAt && ref_token) {
+        jwt.verify(ref_token, process.env.refresh_key, async (err, decoded) => {
           if (err) {
             res
               .status(401)
