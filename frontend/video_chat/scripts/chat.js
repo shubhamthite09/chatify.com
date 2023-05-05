@@ -15,7 +15,7 @@ let userStream;
 const urlParams = new URLSearchParams(window.location.search);
 const roomID = urlParams.get('roomID');
 
-room.innerText = `Your Room ID is ${roomID}, Happy Video-Chatting !!`;
+room.innerText = `please wait your call is geting connected ...... `;
 
 const video = document.createElement('video');
 video.muted = true;
