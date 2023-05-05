@@ -1,11 +1,38 @@
 
-// Total Users
 let userCard=document.getElementById('user-card')
 let totalUser=document.getElementById('user-count');
-// let Userdata;
+
+// let togglebtn = document.querySelectorAll(".checkbox");
+// let darkbtn = document.getElementById("toggletext")
+// // let search = document.querySelectorAll(".fa-solid fa-magnifying-glass")[0]
+// // let dash = document.querySelectorAll(".i-name")[0]
+// togglebtn.addEventListener("click", () => {
+//   console.log("toggle")
+//   body.classList.toggle("dark")
+// //   dash.classList.toggle("middark")
+// })
 
 
-fetch('https://wild-gray-gorilla-garb.cyclic.app/user/all')
+
+
+let togglebtn = document.querySelectorAll(".checkbox");
+let body = document.querySelector("body");
+let dash = document.querySelector(".tabs")
+let usercolor = document.querySelector(".userCount")
+let a = usercolor.textContent
+
+togglebtn.forEach(function (btn) {
+  btn.addEventListener("click", function () {
+    body.classList.toggle("dark");
+    dash.classList.toggle("dark")
+    usercolor.classList.toggle("color")
+  });
+});
+
+
+
+
+fetch('http://localhost:4500/user/all')
 .then((res)=>{
     return res.json();
 })
@@ -62,7 +89,7 @@ function displayUsers(data) {
     block.forEach((element)=>{
         element.addEventListener("click",(e)=>{
             let id=e.target.getAttribute("data-id");
-            fetch(`https://wild-gray-gorilla-garb.cyclic.app/user/${id}`,{
+            fetch(`http://localhost:4500/user/${id}`,{
                 method:"DELETE",
                 headers:{
                     "Content-Type":"application/json"

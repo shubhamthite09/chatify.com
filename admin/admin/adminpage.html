@@ -6,7 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="/styles/adminpage.css">
+    <link rel="stylesheet" href="../styles/adminpage.css">
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
 </head>
 
 <body>
@@ -19,7 +20,7 @@
         <div class="items">
             <li><i class="fa-solid fa-chart-pie"></i><a href="./adminpage.html">Dashboard</a></li>
             <li><i class="fa-solid fa-rotate-right"></i><a href="#">Users</a></li>
-            <li><i class="fa-solid fa-file-invoice-dollar"></i><a href="/version.html">Version</a></li>
+            <li><i class="fa-solid fa-file-invoice-dollar"></i><a href="version.html">Version</a></li>
             <li><i class="fa-brands fa-wpforms"></i><a href="#">General</a></li>
             <li><i class="fa-regular fa-credit-card"></i><a href="#">Analytics</a></li>
             <li><i class="fa-sharp fa-solid fa-headset"></i><a href="#">Support</a></li>
@@ -36,7 +37,7 @@
 
     </section>
 
-    <!-- <header></header> -->
+    <header></header>
     <div class="container">
         <div class="tabs">
             <input type="radio" id="chats" name="group" checked>
@@ -59,7 +60,7 @@
                             </div>
                             <div class="details" id="create_call">
                                 <div class="listHead">
-                                    <h4>User Count : <span id="user-count">0</span></h4>
+                                    <h4 class="userCount">User Count : <span id="user-count">0</span></h4>
                                 </div>
                             </div>
                         </div>
@@ -142,6 +143,12 @@
             </div>
         </div>
     </div>
+<script>
+    $('#menu-btn').click(function () {
+      $('#menu').toggleClass("active");
+    })
+  </script>
 </body>
 
 </html>
+<script src="/admin/adminpage.js"></script>
