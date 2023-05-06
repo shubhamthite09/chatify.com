@@ -1,7 +1,8 @@
 const mongoose = require("mongoose");
 
 const userSchema = mongoose.Schema({
-    consId:{type:Number,required:true},
+  consId:{type:Number,required:true},
+  sendBy:{type:Number,required:true},
   msg:{type:String,required:true},
   time:{type:String,required:true}
 });
