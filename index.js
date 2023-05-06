@@ -14,6 +14,7 @@ const expressWinston = require("express-winston");
 const express = require("express");
 const {chatRouer}= require("./routes/chatRouter")
 const {msgModel} = require("./models/userModle")
+const { conModel }  = require("./models/conModle")
 
 
 const app = express();
@@ -125,10 +126,12 @@ io.on('connection', (socket) => {
   })
   socket.on('join-conver',(data)=>{
     socket.join(data.room)
+    console.log("joined room");
   })
   socket.on("chat",async(data)=>{
     //sending msg to that room
-    data.time=new Date(data.time)
+    
+    await conModel.findOneAndUpdate({consId:data.room},{lastMsg:data.msg,lastTime:data.time,self:data.self})
     let book = new msgModel({consId:data.room,msg:data.msg,time:data.time})
     await book.save()
     io.to(data.room).emit("message",{name:data.username,msg:data.msg})

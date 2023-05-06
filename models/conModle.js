@@ -4,6 +4,9 @@ const userSchema = mongoose.Schema({
     userId:{type:String,required:true},
     consId:{type:Number,required:true},
     frendId:{type:String,required:true},
+    lastMsg:{type:String},
+    lastTime:{type:String},
+    self:{type:Boolean},
     frendName:{type:String,required:true}
 });
 
