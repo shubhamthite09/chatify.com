@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Signup</title>
+ 
+  <link rel="stylesheet" href="/style/signup.css">
+</head>
+<body>
+ 
+<h1 id="flx">welcome</h1>
+  <div class="form-container">
+    <h2 style="margin-top: 20px; margin-bottom: 20px; color: #00a884; ">Account Details</h2>
+    <form>
+      <input id="firstname" type="text" name="first_name" placeholder="First Name" required>
+    <select id="gender"  style="font-size: 18px;" name="gender" required>
+        <option  value="">Select Gender</option>
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+        <option value="other">Other</option>
+      </select>
+   
+    
+   
+      <input id="email"  type="email" name="email" placeholder="Email Address" required>
+      <input id="password"  type="password" name="password" placeholder="Password" required>
+      <input id="mobilenumber"  type="number" name="mobile_number" placeholder="Mobile Number" required>
+      <input type="submit" value="Sign Up">
+    </form>
+    
+    <p>Already have an account? <a href="login.html">Login here</a></p>
+  </div>
+</body>
+</html>
+<script>
+  
+const navLinks = document.querySelector('.nav-links');
+const links = document.querySelectorAll('.nav-links li');
+
+hamburger.addEventListener('click', () => {
+// Toggle the nav-links class to show or hide the navigation links
+navLinks.classList.toggle('nav-active');
+
+// Add animation to each navigation link when the hamburger menu is clicked
+links.forEach((link, index) => {
+  if (link.style.animation) {
+    link.style.animation = '';
+  } else {
+    link.style.animation = `fadeIn 0.5s ease-in forwards ${index / 7 + 0.3}s`;
+  }
+});
+
+// Animate the hamburger menu to become an X icon
+hamburger.classList.toggle('toggle');
+});
+
+
+
+
+    const form = document.querySelector('form');
+    const nameInput = document.getElementById('name');
+    const emailInput = document.getElementById('email');
+    const passwordInput = document.getElementById('password');
+    
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      
+    var firstname=document.getElementById("firstname").value
+   const payload = {
+       firstname:document.getElementById("firstname").value,
+        lastname:document.getElementById("lastname").value,
+       mmddyy:document.getElementById("mmddyy").value,
+        zipcode:document.getElementById("zipcode").value,
+       gender:document.getElementById("gender").value,
+       email:document.getElementById("email").value,
+       password:document.getElementById("password").value,
+       mobilenumber:document.getElementById("mobilenumber").value,
+  
+   }
+
+
+   fetch("http://localhost:8000/users/register",{
+       method:"POST",
+       headers:{"content-type":"application/json"},
+       body:JSON.stringify(payload)
+   
+   }).then(res=> res.json())
+   
+   .then(res=>
+   
+   
+   console.log(res))
+   .catch(res=>console.log(res))
+   
+      alert("thakyou for register")
+      window.location.assign("./login.html")
+  
+    });
+
+
+
+  
+</script> 
