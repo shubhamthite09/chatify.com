@@ -2,7 +2,7 @@
 const allConver = document.querySelector(".chat-list");
 
 
-    let token = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoic2h1YmhhbSIsImlkIjoiNjQ1MjI0ZmY4NDFhM2MwMGQxODQzZGNmIiwicm9sZSI6ImFkbWluaXN0cmV0ZXIiLCJpYXQiOjE2ODMyODg4NzksImV4cCI6MTY4MzI4OTQ3OX0.glgTPoZ3ZkyLlVKKs1Aso2GnxLhXqGRnTwU1l1E3fYc`
+    let token = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoic2h1YmhhbSIsImlkIjoiNjQ1MjI0ZmY4NDFhM2MwMGQxODQzZGNmIiwicm9sZSI6ImFkbWluaXN0cmV0ZXIiLCJpYXQiOjE2ODMyOTcxMzEsImV4cCI6MTY4MzI5NzczMX0.3L2svPIgEJmpkMdVj_zJ_6zgj2Xvk-7lllELa-n5RzU`
     fetch(`http://localhost:7890/chat/getCon`,{
         method:'GET',
         headers:{'Content-type':'Application/json',"authorization":`bearer ${token}`},
