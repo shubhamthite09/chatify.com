@@ -1,50 +1,127 @@
 // ----------------- All the requirements here --------------------------------
+const selfObjectId = "645224ff841a3c00d1843dcf";
+const myAvtar = "https://avatars.githubusercontent.com/u/115460300?v=4"
+let globleData,globleRoom;
+let token = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoic2h1YmhhbSIsImlkIjoiNjQ1MjI0ZmY4NDFhM2MwMGQxODQzZGNmIiwicm9sZSI6ImFkbWluaXN0cmV0ZXIiLCJpYXQiOjE2ODM0ODcxNjcsImV4cCI6MTY4MzQ4ODk2N30.FqdsjVThwT4SkN-AmVgvbJw1eVEFm0VIVGH7xBQCezg`
+const socket = io("http://localhost:7890/", { transports: ["websocket"] })
 const allConver = document.querySelector(".chat-list");
-    let token = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoic2h1YmhhbSIsImlkIjoiNjQ1MjI0ZmY4NDFhM2MwMGQxODQzZGNmIiwicm9sZSI6ImFkbWluaXN0cmV0ZXIiLCJpYXQiOjE2ODMzODQxOTIsImV4cCI6MTY4MzM4NDc5Mn0.oj9xgHkGAWl9Rvyzn0m1CWF0tWO4SelkbdbDJyWnVsE`
+const allChat = document.querySelector(".chat-box");
+const chatSend = document.querySelector(".sendChat");
+const myPhoto = document.getElementById("myAvtar");
+const video = document.getElementById("video");
+myPhoto.innerHTML=`<img src="${myAvtar}" alt="" class="cover">`;
+socket.on("message", (data) =>{
+    console.log(data);
+    if(data.room == globleRoom){
+        if(data.name != selfObjectId){
+            let div = document.createElement("div")
+            div.className = "messagehere mymessage"
+            let message =document.createElement("p");
+            message.innerHTML = data.msg;
+            let br = document.createElement("br");
+            let span = document.createElement("span");
+            span.innerHTML = data.time.slice(16).slice(0,5)
+            message.appendChild(br);
+            message.appendChild(span);
+            div.appendChild(message);
+            allChat.appendChild(div);
+        }
+    }
+})
+window.onload=()=>{
     fetch(`http://localhost:7890/chat/getCon`,{
         method:'GET',
         headers:{'Content-type':'Application/json',"authorization":`bearer ${token}`},
     }).then((res)=>res.json()).then((res)=>{
         console.log(res);
-        render(res)
+        globleData=res;
+        // console.log(globleData);
+        renderConnectins(res)
     }).catch((err)=>console.log(err))
-
-function render(data){
-    allConver.innerHTML="";
-    let ar =  data.map((ele)=>{
-        return componetn(ele)
-    }).join("")
-   allConver.innerHTML=ar;
 }
-function componetn(data){
-    return`
-    <div class="block active"  onClick="lodeMsg(${data.consId})">
-        <div class="imgbx">
-            <img src="https://tse1.mm.bing.net/th?id=OIP.KSbuJ35EtQHy2OX4BrJiZwHaLH&pid=Api&P=0" alt="" class="cover">
+    
 
-        </div>
-        <div class="details">
-            <div class="listhead">
-                <h4>${data.frendName}</h4>
-                <p class="time">${data.lastTime}</p>
-            </div>
-            <div class="message">
-                <p>${data.lastMsg}</p>
-            </div>
-        </div>
-    </div>
-    `
-}
 
-function lodeMsg(inp){
-    console.log("yes",inp);
-    //const socket = io("http://localhost:7890/", { transports: ["websocket"] })
+function lodeMsg(inp,frendId){
+console.log(inp,frendId);
+    showNameAndStatus(frendId);
+    socket.emit("join-oom",({selfObjectId,inp}))
+    globleRoom=inp;
     fetch(`http://localhost:7890/chat/getMsg`,{
         method:'POST',
         headers:{'Content-type':'Application/json',"authorization":`bearer ${token}`},
         body:JSON.stringify({consId:inp})
     }).then((res)=>res.json()).then((res)=>{
-        console.log(res);
+        // console.log(res);
+        rennderMsg(res);
     }).catch((err)=>console.log(err))
 }
 
+chatSend.addEventListener("click",()=>{
+    const chatInp = document.querySelector(".chatInp").value
+    let div = document.createElement("div")
+    div.className = "messagehere messagefriend"
+    let message =document.createElement("p");
+    message.innerHTML = chatInp;
+    let br = document.createElement("br");
+    let span = document.createElement("span");
+    span.innerHTML = Date(Date.now()).slice(16).slice(0,5);
+    message.appendChild(br);
+    message.appendChild(span);
+    div.appendChild(message);
+    allChat.appendChild(div);
+    socket.emit("chat",{room:globleRoom,msg:chatInp,sendBy:selfObjectId,time:Date(Date.now())});
+    chatInp.value=""
+})
+
+video.addEventListener("click", ()=>{
+    window.location.href=`../frontend/video_chat/index.html?room=${globleRoom}`
+    //frontend/video_chat/index.html
+    //frontend/chatpage.js
+})
+// all the functions witch are suppoting the rendr of dom here
+function renderConnectins(data){
+    allConver.innerHTML="";
+    let ar =  data.map((ele)=>{
+        return(`
+    <div class="block active"  onClick="lodeMsg(${ele.consId},'${ele.frendId}')">
+        <div class="imgbx">
+            <img src="${ele.userId==selfObjectId ? ele.frendAvtar : ele.myAvtar}" alt="" class="cover">
+
+        </div>
+        <div class="details">
+            <div class="listhead">
+                <h4>${ele.userId==selfObjectId ? ele.frendName : ele.myName}</h4>
+                <p class="time">${ele.lastTime.slice(16).slice(0,5)}</p>
+            </div>
+            <div class="message">
+                <p>${ele.lastMsg}</p>
+            </div>
+        </div>
+    </div>
+    `)
+    }).join("")
+   allConver.innerHTML=ar;
+}
+function rennderMsg(res){
+    allChat.innerHTML="";
+    let ar =  res.map((ele)=>{
+        return (
+            `<div class="messagehere ${ele.sendBy == selfObjectId ? "messagefriend":"mymessage"}">
+            <p>${ele.msg}<br><span>${ele.time.slice(16).slice(0,5)}</span></p>
+            </div>`
+        )
+    }).reverse().join("")
+    allChat.innerHTML=ar;
+}
+function showNameAndStatus(inp){
+    fetch(`http://localhost:7890/chat/findOne/${inp}`,{
+        method:'GET',
+        headers:{'Content-type':'Application/json',"authorization":`bearer ${token}`},
+    }).then((res)=>res.json()).then((res)=>{
+        console.log(res);
+        let sta = res[0].isActive ? "online" : "offline";
+            document.querySelector(".name").innerHTML=`${res[0].name} <br><span>${sta}</span>`;
+            document.getElementById("userAvtar").innerHTML=`<img src="${res[0].avtar}" alt="" class="cover">`;
+    }).catch((err)=>console.log(err)) 
+}

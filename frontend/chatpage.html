@@ -11,14 +11,10 @@
 </head>
 <body>
     <div class="container">
-
         <div class="leftside">
             <div class="header">
-                <div class="userimg">
-
+                <div class="userimg" id="myAvtar">
                     <img src="https://tse4.explicit.bing.net/th?id=OIP.u7Iug2OjvATbIoKov0lDkwHaE8&pid=Api&P=0" alt="" class="cover">
-
-
 
                 </div>
                 <ul class="nav-icon">
@@ -92,7 +88,6 @@
                 <!-- <div class="block unread">
                     <div class="imgbx">
                         <img src="https://tse4.mm.bing.net/th?id=OIP._8Kty4btP3aJuyTfZTaR0wHaHk&pid=Api&P=0" alt="" class="cover">
-
                     </div>
                     <div class="details">
                         <div class="listhead">
@@ -137,12 +132,16 @@
             <div class="header">
                 <div class="imgtext">
 
-                    <div class="userimg">
+                    <div class="userimg" id="userAvtar">
                         <img src="https://tse1.mm.bing.net/th?id=OIP.KSbuJ35EtQHy2OX4BrJiZwHaLH&pid=Api&P=0" alt="" class="cover">
                     </div>
-                    <h4>Bhavika <br><span>online</span></h4>
+                    <h4 class="name">Bhavika <br><span>online</span></h4>
                 </div>
-                <ul class="nav-icon">
+
+                <ul class="nav-icon" id="video">
+
+               
+
                     <ion-icon style="font-size: 32px; color: #54656f;" name="videocam"></ion-icon>
                     <li><ion-icon name="ellipsis-vertical-outline"></ion-icon></li>
                 </ul>
@@ -150,11 +149,11 @@
 
             <!-- chat shown here -->
             <div class="chat-box">
-                <div class="messagehere mymessage">
-                    <p>hi <br><span>12:15</span></p>
+                <!-- <div class="messagehere mymessage">
+                    <p><br><span></span></p>
                    
-                </div>
-                <div class="messagehere mymessage">
+                </div> -->
+                <!-- <div class="messagehere mymessage">
                   
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. ntium neque doloremque bhytyv hghtj  fdg ex! <br><span>12:15</span></p>
 
@@ -163,7 +162,7 @@
                 <div class="messagehere messagefriend">
                     <p>hello Lorem, ipsum Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aut eaque iusto quas doloribus facilis vero hic rem, quam magni sapiente assumenda quibusdam aspernatur saepe natus vitae sed! Quam, itaque repudiandae? <br><span>12:25</span></p>
 
-                </div>
+                </div> -->
             </div>
        
         <!-- chatpad type message here -->
@@ -171,8 +170,11 @@
         <div class="chatinput">
             <ion-icon name="happy-outline"></ion-icon>
             <ion-icon name="attach-outline"></ion-icon>
-            <input type="text" placeholder="Type a message">
-            <ion-icon name="send"></ion-icon>
+
+            <input type="text" placeholder="Type a message" class="chatInp">
+            <ion-icon name="send" class="sendChat"></ion-icon>
+
+      
         </div>
     </div>
 

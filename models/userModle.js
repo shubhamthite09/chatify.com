@@ -13,6 +13,7 @@ const userSchema = mongoose.Schema({
     enum: ["user"],
     default: "user",
   },
+  isActive: { type: Boolean, required: true},
 });
 
 const userModel = mongoose.model("user", userSchema);
