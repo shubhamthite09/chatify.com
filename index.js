@@ -13,7 +13,7 @@ const winston = require("winston");
 const expressWinston = require("express-winston");
 const express = require("express");
 const {chatRouer}= require("./routes/chatRouter")
-const {msgModel} = require("./models/userModle")
+const {msgModel} = require("./models/messageModle")
 const { conModel }  = require("./models/conModle")
 
 
@@ -110,31 +110,23 @@ app.post('/join', async (req, res) => {
   }
 })
 
-
-
-
 io.on('connection', (socket) => {
   console.log("new user connected",socket.id);
-  socket.on('join-room' , (RoomID , userID) => {
-      console.log(`${userID} joined room ${RoomID}`);
-      socket.join(RoomID);
-      socket.to(RoomID).emit('user-join' , userID);
+  socket.on('join-room' , (data) => {
 
-      socket.on('disconnect' , () => {
-          socket.to(RoomID).emit('user-disconnected', userID);
-      })
-  })
-  socket.on('join-conver',(data)=>{
-    socket.join(data.room)
-    console.log("joined room");
+      console.log(data);
+      socket.join(data.inp);
+
   })
   socket.on("chat",async(data)=>{
     //sending msg to that room
-    
-    await conModel.findOneAndUpdate({consId:data.room},{lastMsg:data.msg,lastTime:data.time,self:data.self})
-    let book = new msgModel({consId:data.room,msg:data.msg,time:data.time})
+    console.log(data.time);
+    await conModel.findOneAndUpdate({consId:data.room},{lastMsg:data.msg,lastTime:data.time,sendBy:data.sendBy})
+    //{consId:data.room,msg:data.msg,time:data.time}
+    let book = new msgModel({consId:data.room,msg:data.msg,time:data.time,sendBy:data.sendBy})
     await book.save()
-    io.to(data.room).emit("message",{name:data.username,msg:data.msg})
+    io.emit("message",{name:data.sendBy,msg:data.msg,time:data.time,room:data.room})
+    console.log({name:data.sendBy,msg:data.msg,time:data.time});
 })
 
 })
@@ -150,7 +142,7 @@ app.get("/", (req, res) => {
 httpServer.listen(process.env.PORT , async() => {
   try {
       await connection;
-      console.log(`connected to mongo db ...`);
+      console.log(`connected to shubham chu ...`);
       console.log("Redis connected");
   } catch (error) {
       console.log("Redis not connected");

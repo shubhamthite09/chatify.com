@@ -13,9 +13,19 @@ chatRouer.get("/",async(req,res)=>{
         console.log(err.meassage)
     }
 })
+
+chatRouer.get("/findOne/:id",async(req,res)=>{
+    try{
+        let data = await userModel.find({_id:req.params.id})
+        res.send(data)
+    }catch(err){
+        console.log(err.meassage)
+    }
+})
+
 chatRouer.get("/getCon",async(req,res)=>{
     try{
-        let data = await conModel.find({userId:req.body.id})
+        let data = await conModel.find({$or:[{userId:req.body.id },{frendId:req.body.id}]})
         res.send(data)
     }catch(err){
         console.log(err.meassage)
@@ -38,10 +48,10 @@ chatRouer.post("/addCon",async(req,res)=>{
 })
 
 chatRouer.post("/getMsg",async(req,res)=>{
-    console.log(req.body.consId);
+    // console.log(req.body.consId);
     try{
         //
-        let booking =await msgModel.aggregate([{$match:{consId: 97}},{$sort:{time: -1}},{$limit:10}])
+        let booking =await msgModel.aggregate([{$match:{consId:req.body.consId }},{$sort:{time: -1}},{$limit:10}])
         res.send(booking)
     }catch(err){
         res.send({err:err.message})

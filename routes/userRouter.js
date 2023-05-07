@@ -11,6 +11,7 @@ const fetch = (...args) =>
 const { userModel } = require("../models/userModle");
 const { redis } = require("../helpers/redis");
 const { passport } = require("../configration/google.auth");
+const { validator } = require("../middleware/middlewares");
 const bcrypt = require("bcrypt");
 const userRouer = express.Router();
 
@@ -117,6 +118,7 @@ userRouer.post("/log", async (req, res) => {
     let user = await userModel.findOne({ email });
     if (user) {
       if (await bcrypt.compare(password, user.password)) {
+        await userModel.findOneAndUpdate({email:user.email},{isActive:true})
         token_Genretor(res, user.name, user._id, user.role);
       } else {
         res.status(406).json({ msg: `user password is worng..` });
@@ -128,7 +130,7 @@ userRouer.post("/log", async (req, res) => {
     res.status(500).send({ err: err.message });
   }
 });
-userRouer.post("/logout", async (req, res) => {
+userRouer.post("/logout",validator, async (req, res) => {
   try {
     token = req.headers.authorization.split(" ")[1];
     if (checkInredis (req.body.name,token) || await tokenModel.findOne({ token })) {
@@ -139,6 +141,7 @@ userRouer.post("/logout", async (req, res) => {
       redis.set(req.body.name,token)
       redis.EXPIRE(req.body.name,2000)
       console.log("redis set",token );
+      await userModel.findOneAndUpdate({_id:req.body.id},{isActive:false,lastLogin:Date(Date.now())})
       res.status(202).json({ msg: `user logout sucsesfully` });
     }
   } catch (err) {
@@ -199,7 +202,7 @@ function token_Genretor(res, name, id, role) {
   let token = jwt.sign(
     { user: name, id: id, role: role },
     process.env.token_key,
-    { expiresIn: "10m" }
+    { expiresIn: "30m" }
   );
   let refreshToken = jwt.sign(
     { user: name, id: id, role: role },
