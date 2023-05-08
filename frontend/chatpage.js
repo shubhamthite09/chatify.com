@@ -6,7 +6,7 @@ const chatSend = document.querySelector(".sendChat");
 const myPhoto = document.getElementById("myAvtar");
 const video = document.getElementById("video");
 // ----------------- All the requirements here --------------------------------
-window.onload = () =>{
+window.onload = () =>{ 
 const urlParams =  new URLSearchParams(window.location.search)
 selfObjectId = urlParams.get('id');
 const myAvtar = urlParams.get('avtar');
