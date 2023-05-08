@@ -18,7 +18,8 @@
 
                 </div>
                 <ul class="nav-icon">
-                    <li><ion-icon name="people-outline"></ion-icon></li>
+                    <li id="group-icon"><ion-icon name="people-outline"></ion-icon></li>
+                    <ul id="contacts-list"></ul>
                     <!-- <li><ion-icon name="scan-circle-outline"></ion-icon></li>
                    
                     <li><ion-icon name="chatbox-ellipses"></ion-icon></li> -->
@@ -133,8 +134,8 @@
                     <h4 class="name">Bhavika <br><span>online</span></h4>
                 </div>
                 <ul class="nav-icon" id="video">
-                    <ion-icon style="font-size: 32px; color: #54656f;" name="videocam"></ion-icon>
-                    <li><ion-icon name="ellipsis-vertical-outline"></ion-icon></li>
+                    <li><ion-icon name="videocam"></ion-icon></li>
+                    <li><ion-icon name="log-out-outline"></ion-icon></li>
                 </ul>
             </div>
 
@@ -170,5 +171,26 @@
     
 </body>
 <script src="https://cdn.socket.io/4.6.0/socket.io.min.js" integrity="sha384-c79GN5VsunZvi+Q/WObgk2in0CbZsHnjEqvFxC5DxHn9lTfNce2WW6h2pH6u/kF+" crossorigin="anonymous"></script>
+<script>
+    const groupIcon = document.getElementById("group-icon");
+const contactsList = document.getElementById("contacts-list");
+
+groupIcon.addEventListener("click", () => {
+  // Retrieve contacts from your data source
+  const contacts = ["bhavi","shubham","sanju"];
+//   hardcoded name write now here we have to add our append contects
+
+  // Clear any existing contacts in the list
+  contactsList.innerHTML = "";
+
+  // Display contacts
+  contacts.forEach(contact => {
+    const li = document.createElement("li");
+    li.textContent = contact.name;
+    contactsList.appendChild(li);
+  });
+});
+
+</script>
 <script src="./chatpage.js"></script>
 </html>

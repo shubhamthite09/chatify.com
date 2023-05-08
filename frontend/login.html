@@ -102,18 +102,13 @@ span{
             <button type="button" class="close-button" aria-label="Close form">&times;</button>
   
         </div>
-        <input type="text" id="name" name="name" placeholder="NAME*" required><br>
-      
-      
         <input type="email" id="email" name="email" placeholder="EMAIL ADDRESS*" required><br>
-      
-        
         <input type="password" id="password" name="password" placeholder="PASSWORD*" required><br>
       
         <a href="#" style="font-size: 19px;">Forget password</a>
         <div class="flex">
             <button id="createaccount" type="submit">CREATE AN ACCOUNT</button>
-            <button id="signup">SIGN IN</button>
+            <button id="signup">LOG IN</button>
           
         </div>
       </form>
@@ -126,7 +121,6 @@ span{
 let flag = false
 
     const form = document.querySelector('form');
-    const nameInput = document.getElementById('name');
     const emailInput = document.getElementById('email');
     const passwordInput = document.getElementById('password');
     const createac = document.getElementById('createaccount')
@@ -154,14 +148,6 @@ let flag = false
         passwordInput.focus();
         return;
       }
-      
-   
-      
-   
-
-
-
-   
    const payload = {
     
        email:document.getElementById("email").value,
@@ -170,7 +156,7 @@ let flag = false
       
    }
 
-   fetch("http://localhost:8000/users/login",{
+   fetch("http://localhost:7890/user/log",{
        method:"POST",
        headers:{"content-type":"application/json"},
        body:JSON.stringify(payload)
@@ -182,6 +168,7 @@ let flag = false
    
   
    alert("user login succes")
+   
     form.reset();
     window.location.assign("./index.html")
    flag=true
