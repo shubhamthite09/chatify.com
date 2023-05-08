@@ -228,7 +228,7 @@ function token_Genretor(res, name, id, role,avtar,id) {
   let token = jwt.sign(
     { user: name, id: id, role: role },
     process.env.token_key,
-    { expiresIn: "30m" }
+    { expiresIn: "30m" }  
   );
   let refreshToken = jwt.sign(
     { user: name, id: id, role: role },
