@@ -23,7 +23,7 @@ chatRouer.get("/findOne/:id",async(req,res)=>{
     }
 })
 
-chatRouer.get("/getCon",async(req,res)=>{
+chatRouer.post("/getCon",async(req,res)=>{
     try{
         let data = await conModel.find({$or:[{userId:req.body.id },{frendId:req.body.id}]})
         res.send(data)

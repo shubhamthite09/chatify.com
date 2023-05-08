@@ -1,15 +1,35 @@
-// ----------------- All the requirements here --------------------------------
-const selfObjectId = "645224ff841a3c00d1843dcf";
-const myAvtar = "https://avatars.githubusercontent.com/u/115460300?v=4"
-let globleData,globleRoom;
-let token = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoic2h1YmhhbSIsImlkIjoiNjQ1MjI0ZmY4NDFhM2MwMGQxODQzZGNmIiwicm9sZSI6ImFkbWluaXN0cmV0ZXIiLCJpYXQiOjE2ODM0ODcxNjcsImV4cCI6MTY4MzQ4ODk2N30.FqdsjVThwT4SkN-AmVgvbJw1eVEFm0VIVGH7xBQCezg`
+let globleData,globleRoom,selfObjectId;
 const socket = io("http://localhost:7890/", { transports: ["websocket"] })
 const allConver = document.querySelector(".chat-list");
 const allChat = document.querySelector(".chat-box");
 const chatSend = document.querySelector(".sendChat");
 const myPhoto = document.getElementById("myAvtar");
 const video = document.getElementById("video");
+// ----------------- All the requirements here --------------------------------
+window.onload = () =>{ 
+const urlParams =  new URLSearchParams(window.location.search)
+selfObjectId = urlParams.get('id');
+const myAvtar = urlParams.get('avtar');
+const token = urlParams.get('token');
+const refreshToken = urlParams.get('refreshToken');
+console.log(token, refreshToken);
+localStorage.setItem("token", JSON.stringify(token));
+localStorage.setItem("refreshToken", JSON.stringify(refreshToken));
+
 myPhoto.innerHTML=`<img src="${myAvtar}" alt="" class="cover">`;
+fetchConnectins();
+}
+
+async function fetchConnectins(){
+    console.log("in  fetchConnectins");
+    let data = await fetch(`http://localhost:7890/chat/getCon`,{
+        method:'POST',
+        headers:{'Content-type':'Application/json',"authorization":`bearer ${JSON.parse(localStorage.getItem('token'))}`},
+    }).then((res)=>res.json())
+    console.log(data);
+    // console.log(globleData);
+    //renderConnectins(res)
+}
 socket.on("message", (data) =>{
     console.log(data);
     if(data.room == globleRoom){
@@ -28,18 +48,6 @@ socket.on("message", (data) =>{
         }
     }
 })
-window.onload=()=>{
-    fetch(`http://localhost:7890/chat/getCon`,{
-        method:'GET',
-        headers:{'Content-type':'Application/json',"authorization":`bearer ${token}`},
-    }).then((res)=>res.json()).then((res)=>{
-        console.log(res);
-        globleData=res;
-        // console.log(globleData);
-        renderConnectins(res)
-    }).catch((err)=>console.log(err))
-}
-    
 
 
 function lodeMsg(inp,frendId){
@@ -49,7 +57,7 @@ console.log(inp,frendId);
     globleRoom=inp;
     fetch(`http://localhost:7890/chat/getMsg`,{
         method:'POST',
-        headers:{'Content-type':'Application/json',"authorization":`bearer ${token}`},
+        headers:{'Content-type':'Application/json',"authorization":`bearer ${JSON.parse(localStorage.getItem('token'))}`},
         body:JSON.stringify({consId:inp})
     }).then((res)=>res.json()).then((res)=>{
         // console.log(res);
@@ -87,7 +95,6 @@ function renderConnectins(data){
     <div class="block active"  onClick="lodeMsg(${ele.consId},'${ele.frendId}')">
         <div class="imgbx">
             <img src="${ele.userId==selfObjectId ? ele.frendAvtar : ele.myAvtar}" alt="" class="cover">
-
         </div>
         <div class="details">
             <div class="listhead">
@@ -117,7 +124,7 @@ function rennderMsg(res){
 function showNameAndStatus(inp){
     fetch(`http://localhost:7890/chat/findOne/${inp}`,{
         method:'GET',
-        headers:{'Content-type':'Application/json',"authorization":`bearer ${token}`},
+        headers:{'Content-type':'Application/json',"authorization":`bearer ${JSON.parse(localStorage.getItem('token'))}`},
     }).then((res)=>res.json()).then((res)=>{
         console.log(res);
         let sta = res[0].isActive ? "online" : "offline";

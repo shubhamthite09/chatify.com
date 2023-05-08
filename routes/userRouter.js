@@ -11,8 +11,8 @@ const fetch = (...args) =>
 const { userModel } = require("../models/userModle");
 const { redis } = require("../helpers/redis");
 const { passport } = require("../configration/google.auth");
-const { validator } = require("../middleware/middlewares");
 const bcrypt = require("bcrypt");
+const { log } = require("winston");
 const userRouer = express.Router();
 
 userRouer.use(express.json());
@@ -32,12 +32,38 @@ userRouer.get(
   async function (req, res) {
     const fetch_user = await userModel.findOne({ email: req.user.email });
     if (fetch_user) {
-      token_Genretor(res, fetch_user.name, fetch_user._id, fetch_user.role);
+      let token = jwt.sign(
+        { user: req.user.name, id: "login with google", role: "user" },
+        process.env.token_key,
+        { expiresIn: "30m" }
+      );
+      let refreshToken = jwt.sign(
+        { user: req.user.name, id: "login with google", role: "user" },
+        process.env.refresh_key,
+        { expiresIn: "120s" }
+      );
+      res.redirect(`http://127.0.0.1:5501/frontend/chatpage.html?avtar=${req.user.avtar}&id=${fetch_user._id}&token=${token}&refreshToken=${refreshToken}`)
+      console.log("here");
     } else {
       req.user.password = bcrypt.hashSync(req.user.password, 2);
       const user = new userModel(req.user);
       await user.save();
-      token_Genretor(res, req.user.name, "login with google", "custemer");
+      let findedUser = await userModel.findOne({email:req.email});
+      let token = jwt.sign(
+        { user: req.user.name, id: "login with google", role: "user" },
+        process.env.token_key,
+        { expiresIn: "30m" }
+      );
+      let refreshToken = jwt.sign(
+        { user: req.user.name, id: "login with google", role: "user" },
+        process.env.refresh_key,
+        { expiresIn: "120s" }
+      );
+      // res.cookie("token", token);
+      // res.status(202).json({ refreshToken });
+      
+      res.redirect(`http://127.0.0.1:5501/frontend/chatpage.html?avtar=${req.user.avtar}&id=${findedUser._id}&token=${token}&refreshToken=${refreshToken}`)
+      console.log("here");
     }
   }
 );
@@ -119,7 +145,7 @@ userRouer.post("/log", async (req, res) => {
     if (user) {
       if (await bcrypt.compare(password, user.password)) {
         await userModel.findOneAndUpdate({email:user.email},{isActive:true})
-        token_Genretor(res, user.name, user._id, user.role);
+        token_Genretor(res, user.name, user._id, user.role,user.avtar,user._id);
       } else {
         res.status(406).json({ msg: `user password is worng..` });
       }
@@ -198,11 +224,11 @@ userRouer.put("/roleUpdate", validator, authorization, async (req, res) => {
   }
 });
 //----------------- Addtional Functions Here -----------------------------------
-function token_Genretor(res, name, id, role) {
+function token_Genretor(res, name, id, role,avtar,id) {
   let token = jwt.sign(
     { user: name, id: id, role: role },
     process.env.token_key,
-    { expiresIn: "30m" }
+    { expiresIn: "30m" }  
   );
   let refreshToken = jwt.sign(
     { user: name, id: id, role: role },
@@ -210,7 +236,7 @@ function token_Genretor(res, name, id, role) {
     { expiresIn: "120s" }
   );
   res.cookie("token", token);
-  res.status(202).json({ refreshToken });
+  res.status(202).json({ refreshToken ,token,avtar,id});
 }
 
 function checkInredis (key , token){
