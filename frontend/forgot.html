@@ -97,65 +97,44 @@ span{
 <body>
   <div class="form">
         <div id="topsignclose">
-            <span>Sign In</span>
-            <button type="button" class="close-button" aria-label="Close form">&times;</button>
+            <span>Forgot Password</span>
   
         </div>
         <input type="email" id="email" name="email" placeholder="EMAIL ADDRESS*" required><br>
-        <input type="password" id="password" name="password" placeholder="PASSWORD*" required><br>
-      
-        <a href="#" id="forg" style="font-size: 19px;">Forget password</a>
-        <div class="flex">
-            <button id="createaccount" type="submit">CREATE AN ACCOUNT</button>
-            <button id="signup">LOG IN</button>
-          
-        </div>
+        <button id="createaccount" type="submit">SEND OTP</button>
+        <input type="password" id="password" name="password" placeholder="NEW PASSWORD*" required><br>
+        <input type="text" id="otp" name="opt" placeholder="OTP" required><br>
+        <button id="signup">Change Password</button>
       </div>
       
 </body>
 </html>
 
 <script>
-
-let flag = false
-
-    const createac = document.getElementById('createaccount')
-
-    createac.addEventListener("click",()=>{
-        window.location.assign("./sighnup.html")
-    })
-    document.getElementById('forg').addEventListener("click",()=>{
-        window.location.assign("./forgot.html")
-    })
-    document.getElementById('signup').addEventListener('click', (event) => {
-      event.preventDefault();
-      console.log("yes");
-      const payload = {
-    
-       email:document.getElementById("email").value,
-      
-       password:document.getElementById("password").value,
-      
-   }
-console.log(payload);
-   fetch("http://localhost:7890/user/log",{
+document.getElementById('createaccount').addEventListener('click', () => {
+    let obj = {email:document.getElementById('email').value}
+    fetch("http://localhost:7890/user/getOtp",{
        method:"POST",
        headers:{"content-type":"application/json"},
-       body:JSON.stringify(payload)
+       body:JSON.stringify(obj)
    
    }).then(res=> res.json())
    .then((res)=>{
-   
-   console.log(res)
-
-    localStorage.setItem("token", JSON.stringify(res.token));
-  localStorage.setItem("refreshToken", JSON.stringify(res.refreshToken));
-  localStorage.setItem("myAvtar", JSON.stringify(res.avtar));
-  localStorage.setItem("selfObjectId", JSON.stringify(res.id));
-   
-   window.location.href = "./chatpage.html";
-
+   alert("opt send on your email address")
    })
-});
-
+})
+document.getElementById('signup').addEventListener('click', () => {
+    let obj = {email:document.getElementById('email').value,
+       password:document.getElementById('password').value,
+       otp:document.getElementById('otp').value}
+    fetch("http://localhost:7890/user/forgot",{
+       method:"POST",
+       headers:{"content-type":"application/json"},
+       body:JSON.stringify(obj)
+   
+   }).then(res=> res.json())
+   .then((res)=>{
+   alert("password updated")
+   })
+})
 </script> 
