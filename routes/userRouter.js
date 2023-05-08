@@ -9,6 +9,7 @@ const { v4: uuidv4 } = require("uuid");
 const fetch = (...args) =>
   import("node-fetch").then(({ default: fetch }) => fetch(...args));
 const { userModel } = require("../models/userModle");
+const { blockModel } = require("../models/blockModle");
 const { redis } = require("../helpers/redis");
 const { passport } = require("../configration/google.auth");
 const bcrypt = require("bcrypt");
@@ -143,12 +144,17 @@ userRouer.post("/log", async (req, res) => {
   try {
     const {email , password} = req.body
     let user = await userModel.findOne({ email });
+    let isUserBlocked = await blockModel.findOne({ email });
     if (user) {
-      if (await bcrypt.compare(password, user.password)) {
-        await userModel.findOneAndUpdate({email:user.email},{isActive:true})
-        token_Genretor(res, user.name, user._id, user.role,user.avtar,user._id);
-      } else {
-        res.status(406).json({ msg: `user password is worng..` });
+      if (isUserBlocked) {
+        res.status(406).json({ msg: `you are blocked` });
+      }else{
+        if (await bcrypt.compare(password, user.password)) {
+          await userModel.findOneAndUpdate({email:user.email},{isActive:true})
+          token_Genretor(res, user.name, user._id, user.role,user.avtar,user._id);
+        } else {
+          res.status(406).json({ msg: `user password is worng..` });
+        }
       }
     } else {
       res.status(406).json({ msg: `user email is worng..` });
@@ -157,6 +163,34 @@ userRouer.post("/log", async (req, res) => {
     res.status(500).send({ err: err.message });
   }
 });
+userRouer.post("/blockUser",validator,authorization, async (req, res) => {
+  try {
+    const {email} = req.body
+    if (await blockModel.findOne({ email })) {
+      res.status(405).json({ error: `you are in alredy blocked ` });
+    } else {
+      const user = blockModel({ email });
+      await user.save();
+      res.status(202).json({ msg: `user block sucsesfully` });
+    }
+  } catch (err) {
+    res.status(500).send({ err: err.message });
+  }
+})
+userRouer.delete("/unBlockUser",validator,authorization, async (req, res) => {
+  try {
+    const {email} = req.body
+    if (await blockModel.findOne({ email })) {
+      res.status(405).json({ error: `you are in alredy blocked ` });
+    } else {
+      const user = blockModel.findOneAndDelete({ email });
+      await user.save();
+      res.status(202).json({ msg: `user unblock sucsesfully` });
+    }
+  } catch (err) {
+    res.status(500).send({ err: err.message });
+  }
+})
 userRouer.post("/logout",validator, async (req, res) => {
   try {
     token = req.headers.authorization.split(" ")[1];
