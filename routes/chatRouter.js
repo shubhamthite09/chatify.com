@@ -13,7 +13,6 @@ chatRouer.get("/",async(req,res)=>{
         console.log(err.meassage)
     }
 })
-
 chatRouer.get("/findOne/:id",async(req,res)=>{
     try{
         let data = await userModel.find({_id:req.params.id})

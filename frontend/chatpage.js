@@ -8,27 +8,28 @@ const video = document.getElementById("video");
 // ----------------- All the requirements here --------------------------------
 window.onload = () =>{ 
 const urlParams =  new URLSearchParams(window.location.search)
-selfObjectId = urlParams.get('id');
-const myAvtar = urlParams.get('avtar');
-const token = urlParams.get('token');
-const refreshToken = urlParams.get('refreshToken');
-console.log(token, refreshToken);
+selfObjectId = urlParams.get('id') || JSON.parse(localStorage.getItem("selfObjectId"))
+const myAvtar = urlParams.get('avtar') || JSON.parse(localStorage.getItem("myAvtar"))
+const token = urlParams.get('token') || JSON.parse(localStorage.getItem("token")) || "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiYmFodmlrYSIsImlkIjoiNjQ1NGRiOTg2OTExYTFlMTY3ZDdlYzk1Iiwicm9sZSI6InVzZXIiLCJpYXQiOjE2ODM1MzIxOTQsImV4cCI6MTY4MzUzMzk5NH0.oC960LXcbOtsVI7I_CVXC7ma4g6wBK0_X6wx-e3Pht0"
+const refreshToken = urlParams.get('refreshToken') || JSON.parse(localStorage.getItem("refreshToken"))
+
 localStorage.setItem("token", JSON.stringify(token));
 localStorage.setItem("refreshToken", JSON.stringify(refreshToken));
+localStorage.setItem("myAvtar", JSON.stringify(myAvtar));
+localStorage.setItem("selfObjectId", JSON.stringify(selfObjectId));
 
 myPhoto.innerHTML=`<img src="${myAvtar}" alt="" class="cover">`;
-fetchConnectins();
+fetchConnectins(JSON.parse(localStorage.getItem("token")));
 }
 
-async function fetchConnectins(){
-    console.log("in  fetchConnectins");
-    let data = await fetch(`http://localhost:7890/chat/getCon`,{
+async function fetchConnectins(token){
+        let data = await fetch(`http://localhost:7890/chat/getCon`,{
         method:'POST',
-        headers:{'Content-type':'Application/json',"authorization":`bearer ${JSON.parse(localStorage.getItem('token'))}`},
-    }).then((res)=>res.json())
-    console.log(data);
-    // console.log(globleData);
-    //renderConnectins(res)
+        headers:{'Content-type':'Application/json',"authorization":`bearer ${token}`},
+        }).then(response => response.json());
+        console.log(data);
+        console.log("in  fetchConnectins",token);
+        renderConnectins(data);
 }
 socket.on("message", (data) =>{
     console.log(data);
