@@ -147,17 +147,17 @@ userRouer.post("/log", async (req, res) => {
     let isUserBlocked = await blockModel.findOne({ email });
     if (user) {
       if (isUserBlocked) {
-        res.status(406).json({ msg: `you are blocked` });
+        res.status(406).json({ error: `you are blocked` });
       }else{
         if (await bcrypt.compare(password, user.password)) {
           await userModel.findOneAndUpdate({email:user.email},{isActive:true})
           token_Genretor(res, user.name, user._id, user.role,user.avtar,user._id);
         } else {
-          res.status(406).json({ msg: `user password is worng..` });
+          res.status(406).json({ error: `user password is worng..` });
         }
       }
     } else {
-      res.status(406).json({ msg: `user email is worng..` });
+      res.status(406).json({ error: `user email is worng..` });
     }
   } catch (err) {
     res.status(500).send({ err: err.message });
