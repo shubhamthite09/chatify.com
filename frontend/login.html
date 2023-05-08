@@ -147,7 +147,9 @@ console.log(payload);
    .then((res)=>{
    
    console.log(res)
-
+   if(res.error){
+    alert(res.error)
+   }else{
     localStorage.setItem("token", JSON.stringify(res.token));
   localStorage.setItem("refreshToken", JSON.stringify(res.refreshToken));
   localStorage.setItem("myAvtar", JSON.stringify(res.avtar));
@@ -155,6 +157,7 @@ console.log(payload);
    
    window.location.href = "./chatpage.html";
 
+   }
    })
 });
 

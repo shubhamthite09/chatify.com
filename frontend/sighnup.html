@@ -77,8 +77,12 @@ document.querySelector('.aouthbuttongit').addEventListener('click',()=>{
    }).then(res=> res.json())
    .then((res)=>{
    console.log(res)
-   alert("thakyou for register")
+   if(res.error){
+    alert(res.error)
+   }else{
+    alert("thakyou for register")
       window.location.href="./login.html";
+   }
     })
    .catch(res=>console.log(res))
     });
