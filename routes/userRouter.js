@@ -139,6 +139,7 @@ userRouer.post("/reg", async (req, res) => {
   }
 });
 userRouer.post("/log", async (req, res) => {
+  console.log(req.body);
   try {
     const {email , password} = req.body
     let user = await userModel.findOne({ email });
@@ -174,7 +175,7 @@ userRouer.post("/logout",validator, async (req, res) => {
     res.status(500).send({ err: err.message });
   }
 });
-userRouer.get("/forgot", async (req, res) => {
+userRouer.post("/getOtp", async (req, res) => {
   try {
     if (await userModel.findOne({ email: req.body.email })) {
       globe_opt = Math.floor(Math.random() * 1000000);

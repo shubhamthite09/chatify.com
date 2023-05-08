@@ -6,14 +6,14 @@ const userSchema = mongoose.Schema({
   password: { type: String, required: true },
   avtar: { type: String },
   mobile: { type: Number },
-  lastLogin:{ type: String, required: true },
+  lastLogin:{ type: String ,default:Date(Date.now())},
   role: {
     type: String,
     required: true,
     enum: ["user"],
     default: "user",
   },
-  isActive: { type: Boolean, required: true},
+  isActive: { type: Boolean ,default: false },
 });
 
 const userModel = mongoose.model("user", userSchema);
