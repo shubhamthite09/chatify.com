@@ -3,6 +3,7 @@ const chatRouer = express.Router();
 const {conModel} = require("../models/conModle")
 const {msgModel} = require("../models/messageModle")
 const { userModel } = require("../models/userModle");
+const { log } = require("winston");
 chatRouer.use(express.json());
 
 chatRouer.get("/",async(req,res)=>{
@@ -33,13 +34,16 @@ chatRouer.post("/getCon",async(req,res)=>{
 
 chatRouer.post("/addCon",async(req,res)=>{
     try{
+        
         let data = await conModel.findOne({frendName:req.body.frendName})
         if(!data){
+            console.log("yes");
             req.body.consId = Math.floor((Math.random() * 100) + 1);
-            const {id,consId,frendName,frendId} = req.body
-            let newCon = new conModel({userId:id,consId,frendName,frendId});
+            console.log(req.body);
+            const {id,consId,frendName,frendId,frendAvtar,user,myAvtar} = req.body
+            let newCon = new conModel({userId:id,consId,frendName,frendId,frendAvtar,myName:user,myAvtar,lastTime:Date(Date.now())});
             await newCon.save()
-            res.send("ok")
+            res.send({msg:"added succesfully"})
         }
     }catch(err){
         console.log(err.meassage)

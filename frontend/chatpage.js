@@ -5,12 +5,15 @@ const allChat = document.querySelector(".chat-box");
 const chatSend = document.querySelector(".sendChat");
 const myPhoto = document.getElementById("myAvtar");
 const video = document.getElementById("video");
+const logout = document.getElementById("logout");
+const groupIcon = document.getElementById("group-icon");
+
 // ----------------- All the requirements here --------------------------------
 window.onload = () =>{ 
 const urlParams =  new URLSearchParams(window.location.search)
 selfObjectId = urlParams.get('id') || JSON.parse(localStorage.getItem("selfObjectId"))
 const myAvtar = urlParams.get('avtar') || JSON.parse(localStorage.getItem("myAvtar"))
-const token = urlParams.get('token') || JSON.parse(localStorage.getItem("token")) || "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiYmFodmlrYSIsImlkIjoiNjQ1NGRiOTg2OTExYTFlMTY3ZDdlYzk1Iiwicm9sZSI6InVzZXIiLCJpYXQiOjE2ODM1MzIxOTQsImV4cCI6MTY4MzUzMzk5NH0.oC960LXcbOtsVI7I_CVXC7ma4g6wBK0_X6wx-e3Pht0"
+const token = urlParams.get('token') || JSON.parse(localStorage.getItem("token"))
 const refreshToken = urlParams.get('refreshToken') || JSON.parse(localStorage.getItem("refreshToken"))
 
 localStorage.setItem("token", JSON.stringify(token));
@@ -25,7 +28,7 @@ fetchConnectins(JSON.parse(localStorage.getItem("token")));
 async function fetchConnectins(token){
         let data = await fetch(`http://localhost:7890/chat/getCon`,{
         method:'POST',
-        headers:{'Content-type':'Application/json',"authorization":`bearer ${token}`},
+        headers:{'Content-type':'Application/json',"authorization":`bearer ${JSON.parse(localStorage.getItem("token"))}`},"refresh":`bearer ${JSON.parse(localStorage.getItem("refreshToken"))}`,
         }).then(response => response.json());
         console.log(data);
         console.log("in  fetchConnectins",token);
@@ -58,7 +61,7 @@ console.log(inp,frendId);
     globleRoom=inp;
     fetch(`http://localhost:7890/chat/getMsg`,{
         method:'POST',
-        headers:{'Content-type':'Application/json',"authorization":`bearer ${JSON.parse(localStorage.getItem('token'))}`},
+        headers:{'Content-type':'Application/json',"authorization":`bearer ${JSON.parse(localStorage.getItem('token'))}`,"refresh":`bearer ${JSON.parse(localStorage.getItem("refreshToken"))}`},
         body:JSON.stringify({consId:inp})
     }).then((res)=>res.json()).then((res)=>{
         // console.log(res);
@@ -85,8 +88,7 @@ chatSend.addEventListener("click",()=>{
 
 video.addEventListener("click", ()=>{
     window.location.href=`../frontend/video_chat/index.html?room=${globleRoom}`
-    //frontend/video_chat/index.html
-    //frontend/chatpage.js
+    
 })
 // all the functions witch are suppoting the rendr of dom here
 function renderConnectins(data){
@@ -125,11 +127,32 @@ function rennderMsg(res){
 function showNameAndStatus(inp){
     fetch(`http://localhost:7890/chat/findOne/${inp}`,{
         method:'GET',
-        headers:{'Content-type':'Application/json',"authorization":`bearer ${JSON.parse(localStorage.getItem('token'))}`},
+        headers:{'Content-type':'Application/json',"authorization":`bearer ${JSON.parse(localStorage.getItem('token'))}`,"refresh":`bearer ${JSON.parse(localStorage.getItem("refreshToken"))}`},
     }).then((res)=>res.json()).then((res)=>{
         console.log(res);
+        localStorage.setItem("myName",JSON.stringify(res[0].name))
         let sta = res[0].isActive ? "online" : "offline";
             document.querySelector(".name").innerHTML=`${res[0].name} <br><span>${sta}</span>`;
             document.getElementById("userAvtar").innerHTML=`<img src="${res[0].avtar}" alt="" class="cover">`;
     }).catch((err)=>console.log(err)) 
 }
+
+logout.addEventListener("click",()=>{
+    fetch(`http://localhost:7890/user/logout`,{
+        method:'POST',
+        headers:{'Content-type':'Application/json',"authorization":`bearer ${JSON.parse(localStorage.getItem('refreshToken'))}`,"refresh":`bearer ${JSON.parse(localStorage.getItem("refreshToken"))}`},
+    }).then((res)=>res.json()).then((res)=>{
+        console.log(res);
+        window.location.href = "./chatpage.html"
+    }).catch((err)=>console.log(err)) 
+});
+
+groupIcon.addEventListener("click", () => {
+  window.location.href = "./addCon.html";
+});
+document.getElementById("admin").addEventListener("click", () => {
+    let role = JSON.parse(localStorage.getItem('role'));
+    if(role == "admin" || role == "administreter"){
+        window.location.href = "./admin.html";
+    }
+})

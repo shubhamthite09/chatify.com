@@ -193,7 +193,7 @@ userRouer.delete("/unBlockUser",validator,authorization, async (req, res) => {
 })
 userRouer.post("/logout",validator, async (req, res) => {
   try {
-    token = req.headers.authorization.split(" ")[1];
+    token = req.headers.refresh.split(" ")[1];
     if (checkInredis (req.body.name,token) || await tokenModel.findOne({ token })) {
       res.status(405).json({ error: `you are in alredy blacklist or logout` });
     } else {
@@ -263,15 +263,15 @@ function token_Genretor(res, name, id, role,avtar,id) {
   let token = jwt.sign(
     { user: name, id: id, role: role },
     process.env.token_key,
-    { expiresIn: "30m" }  
+    { expiresIn: "120m" }  
   );
   let refreshToken = jwt.sign(
     { user: name, id: id, role: role },
     process.env.refresh_key,
-    { expiresIn: "120s" }
+    { expiresIn: "12h" }
   );
   res.cookie("token", token);
-  res.status(202).json({ refreshToken ,token,avtar,id});
+  res.status(202).json({ refreshToken ,token,avtar,id,role});
 }
 
 function checkInredis (key , token){

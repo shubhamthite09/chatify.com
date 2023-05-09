@@ -1,0 +1,138 @@
+{
+  meta: {
+    req: {
+      url: '/chat/findOne/6454db986911a1e167d7ec95',
+      headers: {
+        host: 'localhost:7890',
+        connection: 'keep-alive',
+        'sec-ch-ua': '"Chromium";v="112", "Google Chrome";v="112", "Not:A-Brand";v="99"',
+        dnt: '1',
+        'sec-ch-ua-mobile': '?0',
+        authorization: 'bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoic2h1YmhhbSIsImlkIjoiNjQ1MjI0ZmY4NDFhM2MwMGQxODQzZGNmIiwicm9sZSI6ImFkbWluaXN0cmV0ZXIiLCJpYXQiOjE2ODM2MDc5MTEsImV4cCI6MTY4MzYxNTExMX0.oyfvCO3UwkMvJ50v3rkuWhfsjhmk48JStwWyr2s-VTI',
+        'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36',
+        'content-type': 'Application/json',
+        refresh: 'bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoic2h1YmhhbSIsImlkIjoiNjQ1MjI0ZmY4NDFhM2MwMGQxODQzZGNmIiwicm9sZSI6ImFkbWluaXN0cmV0ZXIiLCJpYXQiOjE2ODM2MDc5MTEsImV4cCI6MTY4MzY1MTExMX0.XtLKqHEbb3TfTl4Cj_bdUtX2en3MYWiJLV4FGlB4a0E',
+        'sec-ch-ua-platform': '"macOS"',
+        accept: '*/*',
+        origin: 'null',
+        'sec-fetch-site': 'cross-site',
+        'sec-fetch-mode': 'cors',
+        'sec-fetch-dest': 'empty',
+        'accept-encoding': 'gzip, deflate, br',
+        'accept-language': 'en-US,en-GB;q=0.9,en;q=0.8',
+        'if-none-match': 'W/"14f-q0FSszjuMJ0qfAGxWLbXtnVjW8w"'
+      },
+      method: 'GET',
+      httpVersion: '1.1',
+      originalUrl: '/chat/findOne/6454db986911a1e167d7ec95',
+      query: {}
+    },
+    res: { statusCode: 200 },
+    responseTime: 126
+  },
+  level: '\x1B[32minfo\x1B[39m',
+  message: 'HTTP GET /chat/findOne/6454db986911a1e167d7ec95'
+}
+{
+  meta: {
+    req: {
+      url: '/chat/getMsg',
+      headers: {
+        host: 'localhost:7890',
+        connection: 'keep-alive',
+        'content-length': '13',
+        'sec-ch-ua': '"Chromium";v="112", "Google Chrome";v="112", "Not:A-Brand";v="99"',
+        dnt: '1',
+        'sec-ch-ua-mobile': '?0',
+        authorization: 'bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoic2h1YmhhbSIsImlkIjoiNjQ1MjI0ZmY4NDFhM2MwMGQxODQzZGNmIiwicm9sZSI6ImFkbWluaXN0cmV0ZXIiLCJpYXQiOjE2ODM2MDc5MTEsImV4cCI6MTY4MzYxNTExMX0.oyfvCO3UwkMvJ50v3rkuWhfsjhmk48JStwWyr2s-VTI',
+        'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36',
+        'content-type': 'Application/json',
+        refresh: 'bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoic2h1YmhhbSIsImlkIjoiNjQ1MjI0ZmY4NDFhM2MwMGQxODQzZGNmIiwicm9sZSI6ImFkbWluaXN0cmV0ZXIiLCJpYXQiOjE2ODM2MDc5MTEsImV4cCI6MTY4MzY1MTExMX0.XtLKqHEbb3TfTl4Cj_bdUtX2en3MYWiJLV4FGlB4a0E',
+        'sec-ch-ua-platform': '"macOS"',
+        accept: '*/*',
+        origin: 'null',
+        'sec-fetch-site': 'cross-site',
+        'sec-fetch-mode': 'cors',
+        'sec-fetch-dest': 'empty',
+        'accept-encoding': 'gzip, deflate, br',
+        'accept-language': 'en-US,en-GB;q=0.9,en;q=0.8'
+      },
+      method: 'POST',
+      httpVersion: '1.1',
+      originalUrl: '/chat/getMsg',
+      query: {}
+    },
+    res: { statusCode: 200 },
+    responseTime: 145
+  },
+  level: '\x1B[32minfo\x1B[39m',
+  message: 'HTTP POST /chat/getMsg'
+}
+{
+  meta: {
+    req: {
+      url: '/chat/getCon',
+      headers: {
+        host: 'localhost:7890',
+        connection: 'keep-alive',
+        'content-length': '0',
+        'sec-ch-ua': '"Chromium";v="112", "Google Chrome";v="112", "Not:A-Brand";v="99"',
+        'content-type': 'Application/json',
+        dnt: '1',
+        'sec-ch-ua-mobile': '?0',
+        authorization: 'bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoic2h1YmhhbSIsImlkIjoiNjQ1MjI0ZmY4NDFhM2MwMGQxODQzZGNmIiwicm9sZSI6ImFkbWluaXN0cmV0ZXIiLCJpYXQiOjE2ODM2MDc5MTEsImV4cCI6MTY4MzYxNTExMX0.oyfvCO3UwkMvJ50v3rkuWhfsjhmk48JStwWyr2s-VTI',
+        'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36',
+        'sec-ch-ua-platform': '"macOS"',
+        accept: '*/*',
+        origin: 'null',
+        'sec-fetch-site': 'cross-site',
+        'sec-fetch-mode': 'cors',
+        'sec-fetch-dest': 'empty',
+        'accept-encoding': 'gzip, deflate, br',
+        'accept-language': 'en-US,en-GB;q=0.9,en;q=0.8'
+      },
+      method: 'POST',
+      httpVersion: '1.1',
+      originalUrl: '/chat/getCon',
+      query: {}
+    },
+    res: { statusCode: 200 },
+    responseTime: 278
+  },
+  level: '\x1B[32minfo\x1B[39m',
+  message: 'HTTP POST /chat/getCon'
+}
+{
+  meta: {
+    req: {
+      url: '/chat/getCon',
+      headers: {
+        host: 'localhost:7890',
+        connection: 'keep-alive',
+        'content-length': '0',
+        'sec-ch-ua': '"Chromium";v="112", "Google Chrome";v="112", "Not:A-Brand";v="99"',
+        'content-type': 'Application/json',
+        dnt: '1',
+        'sec-ch-ua-mobile': '?0',
+        authorization: 'bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoic2h1YmhhbSIsImlkIjoiNjQ1MjI0ZmY4NDFhM2MwMGQxODQzZGNmIiwicm9sZSI6ImFkbWluaXN0cmV0ZXIiLCJpYXQiOjE2ODM2MDc5MTEsImV4cCI6MTY4MzYxNTExMX0.oyfvCO3UwkMvJ50v3rkuWhfsjhmk48JStwWyr2s-VTI',
+        'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36',
+        'sec-ch-ua-platform': '"macOS"',
+        accept: '*/*',
+        origin: 'null',
+        'sec-fetch-site': 'cross-site',
+        'sec-fetch-mode': 'cors',
+        'sec-fetch-dest': 'empty',
+        'accept-encoding': 'gzip, deflate, br',
+        'accept-language': 'en-US,en-GB;q=0.9,en;q=0.8'
+      },
+      method: 'POST',
+      httpVersion: '1.1',
+      originalUrl: '/chat/getCon',
+      query: {}
+    },
+    res: { statusCode: 200 },
+    responseTime: 118
+  },
+  level: '\x1B[32minfo\x1B[39m',
+  message: 'HTTP POST /chat/getCon'
+}
