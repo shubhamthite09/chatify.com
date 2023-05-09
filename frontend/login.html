@@ -150,6 +150,7 @@ console.log(payload);
    if(res.error){
     alert(res.error)
    }else{
+    console.log(res);
     localStorage.setItem("token", JSON.stringify(res.token));
   localStorage.setItem("refreshToken", JSON.stringify(res.refreshToken));
   localStorage.setItem("myAvtar", JSON.stringify(res.avtar));

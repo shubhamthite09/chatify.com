@@ -153,6 +153,6 @@ groupIcon.addEventListener("click", () => {
 document.getElementById("admin").addEventListener("click", () => {
     let role = JSON.parse(localStorage.getItem('role'));
     if(role == "admin" || role == "administreter"){
-        window.location.href = "./admin.html";
+        window.location.href = "./adminpage.html";
     }
 })

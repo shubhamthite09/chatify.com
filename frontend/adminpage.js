@@ -29,10 +29,10 @@ togglebtn.forEach(function (btn) {
   });
 });
 
-
-
-
-fetch('http://localhost:4500/user/all')
+fetch('http://localhost:7890/chat/',{
+    method:'GET',
+        headers:{'Content-type':'Application/json',"authorization":`bearer ${JSON.parse(localStorage.getItem("token"))}`},"refresh":`bearer ${JSON.parse(localStorage.getItem("refreshToken"))}`,
+})
 .then((res)=>{
     return res.json();
 })
@@ -62,7 +62,7 @@ function displayUsers(data) {
         let imgbx=document.createElement('div');
         imgbx.className="imgbx";
         let image=document.createElement('img');
-        image.setAttribute("src",element.picture);
+        image.setAttribute("src",element.avtar);
         imgbx.append(image);
         let details=document.createElement('div');
         details.className="details"
@@ -95,7 +95,7 @@ function displayUsers(data) {
                     "Content-Type":"application/json"
                 }
             }).then((res)=>res.json())
-            .then((data)=>window.location.href ="admipage.html")
+            .then((data)=>window.location.href ="./admipage.html")
             .catch((err)=>console.log(err))
             console.log(id)
         });
