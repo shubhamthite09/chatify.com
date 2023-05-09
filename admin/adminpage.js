@@ -32,7 +32,7 @@ togglebtn.forEach(function (btn) {
 
 
 
-fetch('http://localhost:4500/user/all')
+fetch('http://localhost:7890/chat')
 .then((res)=>{
     return res.json();
 })
@@ -89,7 +89,7 @@ function displayUsers(data) {
     block.forEach((element)=>{
         element.addEventListener("click",(e)=>{
             let id=e.target.getAttribute("data-id");
-            fetch(`http://localhost:4500/user/${id}`,{
+            fetch(`http://localhost:7890/chat/${id}`,{
                 method:"DELETE",
                 headers:{
                     "Content-Type":"application/json"
