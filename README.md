@@ -1,45 +1,61 @@
-# choice-eggs-261
+# Chatfiy
 
-**please DO NOT USE index.js in YOUR Backend APP**
-use server.js or start.js file name instaded. 
+**Welcome to Chatify the whatsapp like realtime chating web application.** 
 
-**please Make daily frontend contribution in frontent directory.**
+For Using application you can find steps below.
 
-**Step 1** ==>  Please new make new Branch Every day using *git branch <branch name>* then *git checkout <branch name>*.
+tech stack ==> 
 
-**Step 2** ==>  Then use *git pull origin main* to pull all the code.
+**express.js,socket.io,javascript,html,css,mongodb.**
 
-**Step 3** ==>  Make your daily contrubution in this *Branch* then commit use *git add .* then *git commit -m"<commit message>"*.
+Routes ==> 
 
-**Step 4** ==>  Then push then code using *git push origin <branch name>*.
+**/user/reg** to register now user.
 
-**.env *instrations* use only this environment veriables** ==> 
+**/user/log**  to login in application.
 
-variable name for mongodb atlas url **mongoURL** .
+**/user/block** for blocking users from applications.
 
-variable name for port **PORT** .
+**/user/unblock** for unblocking users from applications.
 
-variable name for jwt secret key **token_key** .
+**/user/forgot** for forgot password.
 
-variable name for jwt refresh secret key **refresh_key** .
+**/chat/** for getting all the user's of application.
 
-variable name for google auth clint id **GOOGLE_CLIENT_ID** .
+**/chat/getChat** for getting most 10 recent chat messages.
 
-variable name for google auth clint secret **GOOGLE_CLIENT_SECRET** .
+**/chat/addCon** for adding new connection in your account.
 
-variable name for github auth clint id **GITHUB_CLIENT_ID** .
+**Step 1**
 
-variable name for github auth clint secret **GITHUB_CLIENT_SECRET** .
+You can enter your name , email and password and register in our application. or you can use the google or github auth. if already registered you can use login link.
 
-variable name for twitter auth clint id **TWITTER_CLIENT_ID** .
+[<img src="./Screenshot 2023-05-13 at 07.54.11.png">](<img src="./Screenshot 2023-05-13 at 07.54.11.png">)
 
-variable name for twitter auth clint secret **TWITTER_CLIENT_SECRET** .
+**Stem 2**
 
-variable name for sendgrid key **SendGrid_Key** .
+You can put your email address and password to login into your account.
+if you want to forgot your password you can use the forgot password link. or you can goto create a new account.
 
-variable name for redis host **redisHost** .
+[<img src="./Screenshot 2023-05-13 at 07.54.19.png">](<img src="./Screenshot 2023-05-13 at 07.54.19.png">)
 
-variable name for redis port **redisPORT** .
+**Step 3**
 
-variable name for redis pass **redisPass** .
+If you want to change the password you can put your email address and click on send OTP button then when you get otp then put your new password and otp then click on change password button.
 
+[<img src="./Screenshot 2023-05-13 at 07.54.26.png">](<img src="./Screenshot 2023-05-13 at 07.54.26.png">)
+
+**Step 4**
+
+On left side you can see the connections that you have created. and by clicking on one of them you can start chatting with that when you get click it is showing most recent 10 massage of you.
+you can click group icon to start new connection.by clicking on video chat button and it will start a video.
+
+[<img src="./Screenshot 2023-05-13 at 07.55.00.png">](<img src="./Screenshot 2023-05-13 at 07.55.00.png">)
+
+**Step 5**
+
+By clicking on any name of user's profile that available on our website you can make new connections.
+
+[<img src="./Screenshot 2023-05-13 at 07.55.07.png">](<img src="./Screenshot 2023-05-13 at 07.55.07.png">)
+
+**Deployed link** https://friendly-frangollo-9ce165.netlify.app/
