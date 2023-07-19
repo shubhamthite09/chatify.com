@@ -194,9 +194,7 @@ userRouer.delete("/unBlockUser",validator,authorization, async (req, res) => {
 userRouer.post("/logout",validator, async (req, res) => {
   try {
     token = req.headers.authorization.split(" ")[1];
-    if (checkInredis (req.body.name,token) || await tokenModel.findOne({ token })) {
-      res.status(405).json({ error: `you are in alredy blacklist or logout` });
-    } else {
+    
       const user = tokenModel({ token });
       await user.save();
       redis.set(req.body.name,token)
@@ -204,7 +202,6 @@ userRouer.post("/logout",validator, async (req, res) => {
       console.log("redis set",token );
       await userModel.findOneAndUpdate({_id:req.body.id},{isActive:false,lastLogin:Date(Date.now())})
       res.status(202).json({ msg: `user logout sucsesfully` });
-    }
   } catch (err) {
     res.status(500).send({ err: err.message });
   }
