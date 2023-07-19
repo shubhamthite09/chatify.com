@@ -60,7 +60,7 @@ button[type="submit"]:hover {
   position: relative;
   width: 30px;
   top: 0px;
-  left: 335px;
+  left: 70%;
   font-size: 20px;
   font-weight: bold;
   color: white;
@@ -92,6 +92,13 @@ span{
     margin: 0px;
     color: #00a884;
 }
+a{display: flex;
+ color: #00a884;
+ text-decoration: none;
+justify-content: center;
+font-size: 21px;
+}
+
     </style>
 </head>
 <body>
@@ -104,7 +111,7 @@ span{
         <input type="email" id="email" name="email" placeholder="EMAIL ADDRESS*" required><br>
         <input type="password" id="password" name="password" placeholder="PASSWORD*" required><br>
       
-        <a href="#" id="forg" style="font-size: 19px;">Forget password</a>
+        <a href="#" id="forg" >Forget password</a>
         <div class="flex">
             <button id="createaccount" type="submit">CREATE AN ACCOUNT</button>
             <button id="signup">LOG IN</button>
@@ -125,6 +132,10 @@ let flag = false
     createac.addEventListener("click",()=>{
         window.location.assign("./sighnup.html")
     })
+    document.querySelector(".close-button").addEventListener("click",()=>{
+        window.location.assign("./sighnup.html")
+    })
+    
     document.getElementById('forg').addEventListener("click",()=>{
         window.location.assign("./forgot.html")
     })
