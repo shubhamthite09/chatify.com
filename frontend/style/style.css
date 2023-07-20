@@ -364,9 +364,67 @@ color: 25d366;
         outline: none;
         border-radius: 10px;
         font-size: 1em;
+        
     }
 
 .messagefriend span{
 justify-content: right;
 
 }
+#closechat{
+    height: 20px;
+    display: none;
+}
+ @media (max-width: 767px){ 
+  
+    body{
+        display: flex;
+        justify-content: center;
+    align-items:start;
+    height:95vh;
+      width:80%;
+       padding-top:0px;
+      background: linear-gradient(#00a884 0%, #00a884 100px, #e2e1de 100px, #e2e1de 70%);
+margin:0px;
+margin-top:0px;
+      
+    }
+    
+   .container{
+    width:85%;
+   height:80%;
+    margin:0px;
+   }
+    .nav-icon ion-icon{
+        width:18px;
+        margin:0px;
+       padding:0px;
+     
+    }
+    #closechat{
+        height: 20px;
+        display: block;
+    }
+  
+  .search {
+    width:80%;
+    font-size:10px;
+  }
+  
+
+  .nav-icon li {
+    margin-right:10px;
+  }
+
+  .rightside{
+    width:80%;
+  }
+#right-icon li{
+    display:flex;
+    margin:10px;
+    padding:0px;
+  }
+  .imgtext h4{
+    font-size:15px;
+  }
+ }
