@@ -133,3 +133,87 @@ function showNameAndStatus(inp){
             document.getElementById("userAvtar").innerHTML=`<img src="${res[0].avtar}" alt="" class="cover">`;
     }).catch((err)=>console.log(err)) 
 }
+
+
+// --------------------------------------------------------------
+let chatVisible = false;
+
+function toggleChatDisplay() {
+  const leftSide = document.querySelector('.leftside');
+  const rightSide = document.querySelector('.rightside');
+  const closeChatIcon = document.getElementById('closechat');
+
+  if (window.innerWidth <= 767) {
+    if (chatVisible) {
+      leftSide.style.display = 'block';
+      rightSide.style.display = 'none';
+      closeChatIcon.style.display = 'none';
+    } else {
+      leftSide.style.display = 'none';
+      rightSide.style.display = 'block';
+      closeChatIcon.style.display = 'block';
+    }
+  }
+
+  chatVisible = !chatVisible;
+}
+
+const userBlocks = document.querySelectorAll('.block');
+userBlocks.forEach((userBlock) => {
+  userBlock.addEventListener('click', toggleChatDisplay);
+});
+
+const closeChatIcon = document.getElementById('closechat');
+closeChatIcon.addEventListener('click', toggleChatDisplay);
+
+const groupIcon = document.getElementById('group-icon');
+const contactsList = document.getElementById('contacts-list');
+
+groupIcon.addEventListener('click', () => {
+  // Retrieve contacts from your data source
+  const contacts = ["bhavi", "shubham", "sanju"];
+
+  // Clear any existing contacts in the list
+  contactsList.innerHTML = "";
+
+  // Display contacts
+  contacts.forEach(contact => {
+    const li = document.createElement('li');
+    li.textContent = contact.name;
+    contactsList.appendChild(li);
+  });
+});
+// ---------------------------------
+
+
+if (window.innerWidth <= 1200){
+ 
+    showLeftSide()
+        
+    const leftSide = document.querySelector('.leftside');
+    const rightSide = document.querySelector('.rightside');
+    
+    function showLeftSide() {
+        const leftSide = document.querySelector('.leftside');
+        const rightSide = document.querySelector('.rightside');
+        leftSide.style.display = 'block';
+        rightSide.style.display = 'none';
+      }
+    
+    function hideLeftSide() {
+        const leftSide = document.querySelector('.leftside');
+        const rightSide = document.querySelector('.rightside');
+        leftSide.style.display = 'none';
+        rightSide.style.display = 'block';
+      }
+       const userBlocks = document.querySelectorAll('.chat-list');
+    
+      userBlocks.forEach((userBlock) => {
+        userBlock.addEventListener('click', hideLeftSide);
+      });
+      
+      const closeChatIcon = document.getElementById('closechat');
+      closeChatIcon.addEventListener('click', showLeftSide);
+      
+    }
+    
