@@ -1,8 +1,9 @@
-const express = require("express")
+const express = require("express");
 const chatRouer = express.Router();
-const {conModel} = require("../models/conModle")
-const {msgModel} = require("../models/messageModle")
+const {conModel} = require("../models/conModle");
+const {msgModel} = require("../models/messageModle");
 const { userModel } = require("../models/userModle");
+const {groupModel} = require("../models/groupModel");
 chatRouer.use(express.json());
 
 chatRouer.get("/",async(req,res)=>{
@@ -47,13 +48,22 @@ chatRouer.post("/addCon",async(req,res)=>{
 })
 
 chatRouer.post("/getMsg",async(req,res)=>{
-    // console.log(req.body.consId);
     try{
-        //
         let booking =await msgModel.aggregate([{$match:{consId:req.body.consId }},{$sort:{time: -1}},{$limit:10}])
         res.send(booking)
     }catch(err){
         res.send({err:err.message})
     }
 })
+
+chatRouer.post("/createGroup",async(req,res)=>{
+    try{
+        let booking =new groupModel(req.body);
+        booking.save();
+        res.send(booking)
+    }catch(err){
+        res.send({err:err.message})
+    }
+})
+
 module.exports={chatRouer}
