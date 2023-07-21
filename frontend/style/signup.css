@@ -1,4 +1,3 @@
-
 body {
   font-family: Arial, sans-serif;
   background-color: #f1f1f1;
@@ -11,7 +10,7 @@ body {
   background-color: #fff;
   border-radius: 5px;
   padding: 20px;
-  box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
 }
 
 .form-container h2 {
@@ -32,67 +31,42 @@ body {
   border: none;
   border-bottom: 2px solid #ccc;
   outline: none;
+  font-size: 18px;
 }
 
-.form-container input[type="submit"] {
+.form-container input[type="submit"],
+.aouthbutton,
+.aouthbuttongit {
   background-color: #00a884;
-color: white;
+  color: white;
   border: none;
   padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
   font-size: 16px;
-  
-margin: 20px;
-font-weight: bold;
+  margin: 20px;
+  font-weight: bold;
 }
 
-.aouthbutton{
-  background-color: #00a884;
-color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
-  
-margin: 20px;
-font-weight: bold;
-}
-.aouthbuttongit{
-  background-color: #00a884;
-color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
-  
-margin: 20px;
-font-weight: bold;
-}
-
-.form-container input[type="submit"]:hover {
+.form-container input[type="submit"]:hover,
+.aouthbutton:hover,
+.aouthbuttongit:hover {
   background-color: rgb(173, 172, 172);
   color: #00a884;
   border-width: 2px;
   border-color: #00a884;
-  
 }
 
 .form-container a {
   color: #00a884;
   text-decoration: underline;
-
 }
 
 .form-container a:hover {
   text-decoration: underline;
 }
-form input{
-  font-size: 18px;
-}
-#flx{
+
+#flx {
   display: flex;
   justify-content: center;
   font-size: 40px;
