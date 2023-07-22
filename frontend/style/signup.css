@@ -72,3 +72,11 @@ body {
   font-size: 40px;
   color: #00a884;
 }
+
+@media screen and (max-width: 768px) {
+  .button_google_git {
+    display: inline-block;
+    width: 100%;
+    margin: 10px 0;
+  }
+}

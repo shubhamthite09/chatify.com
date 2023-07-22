@@ -50,7 +50,20 @@ socket.on("message", (data) =>{
     }
 })
 
-
+searchInput.addEventListener("input",()=>{
+    let value = document.getElementById('seachByname').value;
+    //console.log(value);
+    const searchResults = connectionData.filter(obj => obj.frendName
+        .includes(value));
+    if (value.length > 0 ) {
+        //console.log(searchResults);
+        renderConnectins(searchResults);
+    }else if(value.length == 0){
+        renderConnectins(connectionData);
+    } else {
+        allConver.innerHTML = "No matching name found";
+    }
+});
 function lodeMsg(inp,frendId){
 console.log(inp,frendId);
     showNameAndStatus(frendId);
