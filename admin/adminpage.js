@@ -2,15 +2,23 @@
 let userCard=document.getElementById('user-card')
 let totalUser=document.getElementById('user-count');
 
-// let togglebtn = document.querySelectorAll(".checkbox");
-// let darkbtn = document.getElementById("toggletext")
-// // let search = document.querySelectorAll(".fa-solid fa-magnifying-glass")[0]
-// // let dash = document.querySelectorAll(".i-name")[0]
-// togglebtn.addEventListener("click", () => {
-//   console.log("toggle")
-//   body.classList.toggle("dark")
-// //   dash.classList.toggle("middark")
-// })
+function searchUsers() {
+    var input, filter, ul, li, a, i, txtValue;
+    input = document.getElementById("search-input");
+    filter = input.value.toUpperCase();
+    ul = document.getElementById("user-card");
+    li = ul.getElementsByTagName("li");
+    for (i = 0; i < li.length; i++) {
+        a = li[i].getElementsByTagName("a")[0];
+        txtValue = a.textContent || a.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            li[i].style.display = "";
+        } else {
+            li[i].style.display = "none";
+        }
+    }
+}
+document.getElementById("search-input").addEventListener("input", searchUsers);
 
 
 
