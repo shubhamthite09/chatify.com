@@ -1,105 +1,182 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
- <style>
-    /* Style for the entire page */
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-}
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+            color: #333;
+        }
+        #versionList {
+            background-color: #f2f2f2;
+            padding: 20px;
+            text-align: center;
+        }
 
-/* Style for the div with ID "versionList" */
-#versionList {
-  background-color: #f2f2f2;
-  padding: 20px;
-  text-align: center;
-}
+        img {
+            display: block;
+            margin: auto;
+            width: 200px;
+            height: auto;
+            border-radius: 50%;
+            animation: rotate 2s infinite linear;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
-/* Style for the image */
-img {
-  display: block;
-  margin: auto;
-  width: 200px;
-  height: auto;
-  border-radius: 50%;
-  animation: rotate 2s infinite linear;
-}
+        li {
+            margin: 10px;
+            padding: 10px;
+            background-color: #f2f2f2;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 2px 2px 5px #888888;
+            transition: all 0.3s ease-in-out;
+        }
+        li:hover {
+            background-color: #d4d4d4;
+            transform: scale(1.1);
+            box-shadow: 4px 4px 10px #888888;
+        }
 
-/* Style for the unordered list */
-ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+   
+        #arrow {
+            font-size: 30px;
+            color: #999999;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+        }
 
-/* Style for the list items */
-li {
-  margin: 10px;
-  padding: 10px;
-  background-color: #f2f2f2;
-  border-radius: 5px;
-  cursor: pointer;
-  box-shadow: 2px 2px 5px #888888;
-  transition: all 0.3s ease-in-out;
-}
+ 
+        #arrow:hover {
+            color: #666666;
+        }
 
-/* Style for the list items on hover */
-li:hover {
-  background-color: #d4d4d4;
-  transform: scale(1.1);
-  box-shadow: 4px 4px 10px #888888;
-}
+    
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
 
-/* Style for the arrow icon */
-#arrow {
-  font-size: 30px;
-  color: #999999;
-  cursor: pointer;
-  transition: all 0.3s ease-in-out;
-}
+            to {
+                transform: rotate(360deg);
+            }
+        }
 
-/* Style for the arrow icon on hover */
-#arrow:hover {
-  color: #666666;
-}
+        body.dark-mode {
+            background-color: #333;
+            color: #fff;
+        }
 
-/* Animation for the image */
-@keyframes rotate {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+        body.dark-mode #versionList,
+        body.dark-mode li {
+            background-color: #444;
+            color: #fff;
+        }
 
- </style>
+        #theme-switch {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 2px 2px 5px #888888;
+            transition: all 0.3s ease-in-out;
+        }
+
+     
+        #theme-switch:hover {
+            background-color: #0056b3;
+            box-shadow: 4px 4px 10px #888888;
+        }
+
+       
+        .icon {
+            font-size: 24px;
+            margin-right: 5px;
+        }
+
+        .icon.sun {
+            color: #fdd835;
+        }
+
+        .icon.moon {
+            color: #757575;
+        }
+        .theme-switch-button {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 2px 2px 5px #888888;
+    transition: all 0.3s ease-in-out;
+}
+.theme-switch-button:hover {
+    background-color: #0056b3;
+    box-shadow: 4px 4px 10px #888888;
+}
+    </style>
 </head>
+
 <body>
-        <div id="versionList">
-            <h2>All Versions</h2>
-        </div>
-        <img src="https://th.bing.com/th/id/OIP.qDP7V18vL8j6wCMcs_CkxAHaFL?w=270&h=188&c=7&r=0&o=5&dpr=2&pid=1.7" alt="">
-        <div>
-            <ul>
-                <li>1.1.1</li>
-                <li>1.1.2</li>
-                <li>1.1.3</li>
-                <li>2.1.1</li>
-                <li>2.1.2</li>
-                <i id="arrow" class='bx bxs-right-arrow-square'></i>
-                <li>2.1.3</li>
-                
-            </ul>
-        </div>
+    <div id="versionList">
+        <h2>All Versions</h2>
+    </div>
+    <img src="https://th.bing.com/th/id/OIP.qDP7V18vL8j6wCMcs_CkxAHaFL?w=270&h=188&c=7&r=0&o=5&dpr=2&pid=1.7" alt="">
+    <div>
+        <ul>
+            <li>1.1.1</li>
+            <li>1.1.2</li>
+            <li>1.1.3</li>
+            <li>2.1.1</li>
+            <li>2.1.2</li>
+            <i id="arrow" class='bx bxs-right-arrow-square'></i>
+            <li>2.1.3</li>
+
+        </ul>
+    </div>
+
+    <!-- Theme switch button -->
+    <button id="theme-switch" class="theme-switch-button">
+      <span class="icon sun bx bxs-sun"></span>
+      <span class="icon moon bx bxs-moon"></span>
+      Switch Theme
+  </button>
+
+    <script>
+        const themeSwitch = document.getElementById('theme-switch');
+        const body = document.body;
+
+        themeSwitch.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+        });
+    </script>
 </body>
+
 </html>
