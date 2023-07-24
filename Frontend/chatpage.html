@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>whatsApp</title>
+    <link rel="stylesheet" href="./style/style.css">
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="leftside">
+            <div class="header">
+                <div class="userimg" id="myAvtar">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/WhatsApp_logo-color-vertical.svg/2048px-WhatsApp_logo-color-vertical.svg.png" alt="" class="cover">
+
+                </div>
+                <ul class="nav-icon">
+                    <li id="admin"><ion-icon name="person-add"></ion-icon></li>
+                    <li id="group-icon"><ion-icon name="people-outline"></ion-icon></li>
+                    <ul id="contacts-list"></ul>
+                    
+                    <li><ion-icon name="ellipsis-vertical"></ion-icon></li>
+                </ul>
+            </div>
+            <div class="search">
+<div>
+    
+    <ion-icon name="search-outline"></ion-icon>
+    <input type="text" placeholder="Search or start new chat" id="seachByname">
+</div>
+            </div>
+            <!-- chat contect list -->
+            <div class="chat-list">
+                <div class="block unread">
+                    <div class="imgbx">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/WhatsApp_logo-color-vertical.svg/2048px-WhatsApp_logo-color-vertical.svg.png" alt="" class="cover">
+                    </div>
+                    <div class="details">
+                        <div class="listhead">
+                            <h4>chatify</h4>
+                            <p class="time">12:00</p>
+                        </div>
+                        <div class="message">
+                            <p>Hi Make New connection's by clicking group Icon</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="rightside">
+
+            <div class="header">
+                <div class="imgtext">
+
+                    <div class="userimg" id="userAvtar">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/WhatsApp_logo-color-vertical.svg/2048px-WhatsApp_logo-color-vertical.svg.png" alt="" class="cover">
+                    </div>
+                    <h4 class="name">No User <br><span>online</span></h4>
+                </div>
+
+                <ul class="nav-icon">
+                    <li id="video"><ion-icon name="videocam"></ion-icon></li>
+                    <li id="vice"><ion-icon name="call-outline"></ion-icon></li>
+                    <li id="logout"><ion-icon name="log-out-outline"></ion-icon></li>
+                </ul>
+            </div>
+
+            <!-- chat shown here -->
+            <div class="chat-box">
+                <!-- <div class="messagehere mymessage">
+                    <p><br><span></span></p>
+                   
+                </div> -->
+                <!-- <div class="messagehere mymessage">
+                  
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. ntium neque doloremque bhytyv hghtj  fdg ex! <br><span>12:15</span></p>
+
+                </div>
+
+                <div class="messagehere messagefriend">
+                    <p>hello Lorem, ipsum Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aut eaque iusto quas doloribus facilis vero hic rem, quam magni sapiente assumenda quibusdam aspernatur saepe natus vitae sed! Quam, itaque repudiandae? <br><span>12:25</span></p>
+
+                </div> -->
+            </div>
+       
+        <!-- chatpad type message here -->
+
+        <div class="chatinput">
+            <ion-icon name="happy-outline"></ion-icon>
+            <ion-icon name="attach-outline"></ion-icon>
+
+            <input type="text" placeholder="Type a message" class="chatInp" id="myInput">
+            <ion-icon name="send" class="sendChat" id="myBtn" onclick="send()"></ion-icon>
+
+      
+        </div>
+    </div>
+
+    </div>
+    
+</body>
+<script src="https://cdn.socket.io/4.6.0/socket.io.min.js" integrity="sha384-c79GN5VsunZvi+Q/WObgk2in0CbZsHnjEqvFxC5DxHn9lTfNce2WW6h2pH6u/kF+" crossorigin="anonymous"></script>
+<script>
+
+
+</script>
+<script src="./chatpage.js"></script>
+</html>
