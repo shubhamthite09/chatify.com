@@ -897,7 +897,8 @@ nav div{
     cursor: pointer;
 }
 
-/* new */
+
+
 
 .search-container {
     margin-top: 10px;
@@ -918,4 +919,139 @@ nav div{
     border-radius: 5px;
     width: 200px;
     font-size: 0.9em;
+}
+=======
+#menu-btn {
+    display: none;
+    color: #2b2b2b;
+    font-size: 30px;
+    cursor: pointer;
+    margin-right: 20px;
+}
+
+/* //media queries */
+
+@media (max-width: 769px) {
+   
+    #menu {
+        /* display: none; */
+        width: 270px;
+        position: fixed;
+        left: -270px;
+        transition: 0.3s ease;
+        z-index: 999;
+        background-color: #000000;
+    }
+
+    #menu.active {
+        left: -0px;
+    }
+    #menu-btn {
+        display: block;
+        position: fixed;
+        top: 15px;
+        left: 15px;
+        font-size: 20px;
+        color: #ffffff;
+        cursor: pointer;
+        z-index: 1000;
+    }
+    /* #menu-btn {
+        display: initial;
+    } */
+
+    #interface {
+        width: 100%;
+        margin-left: 0px;
+        display: inline-block;
+        transition: 0.3s ease;
+    }
+
+    #menu.active~#interface {
+        width: calc(100% - 270px);
+        margin-left: 270px;
+        transition: 0.3s ease;
+    }
+
+    #interface .navigation {
+        width: 100%;
+    }
+
+    .values {
+        padding: 30px 30px 0 30px;
+        margin: auto;
+        display: flex;
+
+        justify-content: flex-start;
+    }
+
+    .values .val-box {
+        padding: 16px 20px;
+        margin: 10px 20px 10px 0;
+
+    }
+
+    .board {
+        width: 92%;
+        padding: 0;
+        overflow-x: auto;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    #btn {
+        display: block;
+        margin: auto;
+        padding: 5px 10px;
+        color: #111827;
+        font-weight: 600;
+        background-color: chartreuse;
+        border: none;
+        border-radius: 4px;
+        position: relative;
+
+    }
+    #hbtn {
+        display: block;
+        margin: auto;
+        margin-bottom: 10px;
+        padding: 5px 10px;
+        color: #111827;
+        font-weight: 600;
+        background-color: chartreuse;
+        border: none;
+        border-radius: 4px;
+        position: relative;
+
+    }
+}
+
+@media (max-width: 477px) {
+    #interface .navigation {
+        padding: 15px;
+    }
+
+    #interface .navigation .search input {
+        width: 150px;
+    }
+
+    .i-name {
+        padding: 30px 15px 0 15px;
+    }
+
+    .values {
+        padding: 15px 15px 0 15px;
+    }
+
+    .values .val-box {
+        width: 100%;
+        margin: 8px 0px;
+    }
+
+    .board {
+        margin: 30px 15px 30px 15px;
+    }
 }

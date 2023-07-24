@@ -119,15 +119,14 @@ font-size: 21px;
 }
 
 }
-
     </style>
 </head>
 <body>
+
   <div class="form">
         <div id="topsignclose">
             <span>Sign In</span>
             <button type="button" class="close-button" aria-label="Close form">&times;</button>
-  
         </div>
         <input type="email" id="email" name="email" placeholder="EMAIL ADDRESS*" required><br>
         <input type="password" id="password" name="password" placeholder="PASSWORD*" required><br>
@@ -136,62 +135,55 @@ font-size: 21px;
         <div class="flex">
             <button id="createaccount" type="submit">CREATE AN ACCOUNT</button>
             <button id="signup">LOG IN</button>
-          
         </div>
         <a href="/admin/admin/admin.html">Are You An Admin</a>
-      </div>
+    </div>
       
+    <script>
+        let flag = false;
+
+        const createac = document.getElementById('createaccount');
+        createac.addEventListener("click", () => {
+            window.location.assign("./sighnup.html");
+        });
+
+        document.querySelector(".close-button").addEventListener("click", () => {
+            window.location.assign("./sighnup.html");
+        });
+
+        document.getElementById('forg').addEventListener("click", () => {
+            window.location.assign("./forgot.html");
+        });
+
+        document.getElementById('signup').addEventListener('click', (event) => {
+            event.preventDefault();
+            console.log("yes");
+            const payload = {
+                email: document.getElementById("email").value,
+                password: document.getElementById("password").value,
+            };
+            console.log(payload);
+            fetch("http://localhost:7890/user/log", {
+                method: "POST",
+                headers: {"content-type": "application/json"},
+                body: JSON.stringify(payload)
+            })
+            .then(res => res.json())
+            .then((res) => {
+                console.log(res);
+                if (res.error) {
+                    alert(res.error);
+                } else {
+                    localStorage.setItem("token", JSON.stringify(res.token));
+                    localStorage.setItem("refreshToken", JSON.stringify(res.refreshToken));
+                    localStorage.setItem("myAvtar", JSON.stringify(res.avtar));
+                    localStorage.setItem("selfObjectId", JSON.stringify(res.id));
+                    window.location.href = "./chatpage.html";
+                }
+            });
+        });
+    </script>
+    
 </body>
+
 </html>
-
-<script>
-
-let flag = false
-
-    const createac = document.getElementById('createaccount')
-
-    createac.addEventListener("click",()=>{
-        window.location.assign("./sighnup.html")
-    })
-    document.querySelector(".close-button").addEventListener("click",()=>{
-        window.location.assign("./sighnup.html")
-    })
-    
-    document.getElementById('forg').addEventListener("click",()=>{
-        window.location.assign("./forgot.html")
-    })
-    document.getElementById('signup').addEventListener('click', (event) => {
-      event.preventDefault();
-      console.log("yes");
-      const payload = {
-    
-       email:document.getElementById("email").value,
-      
-       password:document.getElementById("password").value,
-      
-   }
-console.log(payload);
-   fetch("http://localhost:7890/user/log",{
-       method:"POST",
-       headers:{"content-type":"application/json"},
-       body:JSON.stringify(payload)
-   
-   }).then(res=> res.json())
-   .then((res)=>{
-   
-   console.log(res)
-   if(res.error){
-    alert(res.error)
-   }else{
-    localStorage.setItem("token", JSON.stringify(res.token));
-  localStorage.setItem("refreshToken", JSON.stringify(res.refreshToken));
-  localStorage.setItem("myAvtar", JSON.stringify(res.avtar));
-  localStorage.setItem("selfObjectId", JSON.stringify(res.id));
-   
-   window.location.href = "./chatpage.html";
-
-   }
-   })
-});
-
-</script> 
