@@ -5,6 +5,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+    integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Chatify Admin Panel</title>
     <link rel="stylesheet" href="../styles/adminpage.css">
     <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
@@ -15,6 +18,9 @@
         <div class="logo">
             <h2>Chatify</h2>
 
+            <!-- <div>
+                <i id="menu-btn" class="fa-brands fa-usb "></i>
+              </div> -->
         </div>
 
         <div class="items">
@@ -25,7 +31,7 @@
             <li><i class="fa-regular fa-credit-card"></i><a href="#">Analytics</a></li>
             <li><i class="fa-sharp fa-solid fa-headset"></i><a href="#">Support</a></li>
             <hr>
-            <li> <i class="fa-solid fa-right-from-bracket"></i><a href="./index.html">Logout</a></li>
+            <li> <i class="fa-solid fa-right-from-bracket"></i><a href="../admin/admin.html">Logout</a></li>
 
         </div>
 
@@ -39,6 +45,7 @@
 
     <header></header>
     <div class="container">
+        <i id="menu-btn" class="fas fa-bars"></i>
         <div class="tabs">
             <input type="radio" id="chats" name="group" checked>
             <input type="radio" id="status" name="group">
@@ -87,56 +94,6 @@
                                 </div>
                             </div>
                             <label>Settings</label>
-                            <!-- <div class="block">
-                                <div class="imgbx">
-                                    <img src="#">
-                                </div>
-                                <div class="details">
-                                    <div class="listHead">
-                                        <h4>User</h4>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="block">
-                                <div class="imgbx">
-                                    <img src="#">
-                                </div>
-                                <div class="details">
-                                    <div class="listHead">
-                                        <h4>Community</h4>
-                                    </div>
-                                </div>
-                            </div> -->
-                            <!-- <div class="block">
-                                <div class="imgbx">
-                                    <img src="#">
-                                </div>
-                                <div class="details">
-                                    <div class="listHead">
-                                        <h4>Persionalise</h4>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="block">
-                                <div class="imgbx">
-                                    <img src="#">
-                                </div>
-                                <div class="details">
-                                    <div class="listHead">
-                                        <h4>General</h4>
-                                    </div>
-                                </div>
-                            </div> -->
-                            <!-- <div class="block">
-                                <div class="imgbx">
-                                    <img src="#">
-                                </div>
-                                <div class="details">
-                                    <div class="listHead">
-                                        <h4>Version</h4>
-                                    </div>
-                                </div>
-                            </div> -->
                         </div>
                     </div>
                 </div>
@@ -152,6 +109,3 @@
 
 </html>
 <script src="/admin/adminpage.js"></script>
-
-
-<!-- //demo -->
